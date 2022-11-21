@@ -8,6 +8,9 @@ namespace Entidades
 {
     public class Cartuchera <T> where T : Utiles
     {
+        public delegate void CartucheraAction(object cartuchera, EventArgs e);
+        public event CartucheraAction EventoPrecio;
+
         private List<T> utiles;
         private int capacidad;
 
@@ -43,8 +46,13 @@ namespace Entidades
             {
                 throw new CartucheraLlenaException("No hay capacidad en la cartuchera");
             }
-
+           
             cartuchera.Utiles.Add(util);
+
+            if (cartuchera.PrecioTotal > 500 && cartuchera.EventoPrecio is not null)
+            {
+                cartuchera.EventoPrecio.Invoke(cartuchera,e);
+            }
 
             return cartuchera;
         }
