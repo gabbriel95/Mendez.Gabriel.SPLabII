@@ -51,7 +51,28 @@ namespace Entidades
             }
         }
 
-        //FALTA AGREGAR UNA QUERY QUE RETORNE UN LAPIZ
+        public static Lapiz ObtenerLapiz(int lapizId)
+        {
+            try
+            {
+                conexion.Open();
+                comando.CommandText = $"SELECT * UTILESS WHERE id={lapizId}";
+                reader = comando.ExecuteReader();
+
+                Lapiz lapiz = new Lapiz((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (Lapiz.eColor)reader["color"]);
+                
+                return lapiz;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
 
         public static bool InsertarLapiz(Lapiz lapiz)
         {

@@ -51,6 +51,29 @@ namespace Entidades
             }
         }
 
+        public static Goma ObtenerGoma(int gomaId)
+        {
+            try
+            {
+                conexion.Open();
+                comando.CommandText = $"SELECT * UTILESS WHERE id={gomaId}";
+                reader = comando.ExecuteReader();
+
+                Goma goma = new Goma((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (Goma.eTamanio)reader["tamanio"]);
+
+                return goma;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
 
         public static bool InsertarGoma(Goma goma)
         {

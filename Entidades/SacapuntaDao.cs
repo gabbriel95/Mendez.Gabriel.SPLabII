@@ -51,6 +51,30 @@ namespace Entidades
             }
         }
 
+        public static Sacapunta ObtenerSacapunta(int sacapuntaId)
+        {
+            try
+            {
+                conexion.Open();
+                comando.CommandText = $"SELECT * UTILESS WHERE id={sacapuntaId}";
+                reader = comando.ExecuteReader();
+
+                Sacapunta sacapunta = new Sacapunta((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (Sacapunta.eTipo)reader["tipo"]);
+
+                return sacapunta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+
         public static bool InsertarSacapuntas(Sacapunta sacapuntas)
         {
             try
