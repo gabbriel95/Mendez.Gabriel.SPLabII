@@ -78,8 +78,17 @@ namespace Entidades
         {
             try
             {
+                string query = string.Format("INSERT INTO UTILESS VALUES (util=@util, marca=@marca, precio=@precio, tipo=@tipo, color=@color,tamanio=@tamanio id_cartuchera=@id_cartuchera)");
                 conexion.Open();
-                comando.CommandText = $"INSERT INTO LAPICES VALUES ({lapiz.Id},'{lapiz.GetType()}','{lapiz.Marca}', {lapiz.Precio}, NULL, '{lapiz.Color}', NULL, 1)";
+                comando.CommandText = query;
+                comando.Parameters.AddWithValue("@marca", "asd");
+                comando.Parameters.AddWithValue("@util", "Lapiz");
+                comando.Parameters.AddWithValue("@precio", "22");
+                comando.Parameters.AddWithValue("@color", "rojo");
+                comando.Parameters.AddWithValue("@tamanio", null);
+                comando.Parameters.AddWithValue("@tipo", null);
+                comando.Parameters.AddWithValue("@id_cartuchera", "1");
+
                 comando.ExecuteNonQuery();
                 return true;
             }
