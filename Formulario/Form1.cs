@@ -20,11 +20,13 @@ namespace Formulario
         {
             InitializeComponent();
             listaUtiles = new List<Utiles>();
-            cartuchera = new Cartuchera<Utiles>(listaUtiles, 5);
+            cartuchera = new Cartuchera<Utiles>(1,listaUtiles, 5);
         }
 
         private void btnAnadirUtil_Click(object sender, EventArgs e)
         {
+            FrmAgregarUtil frmAgregarUtil = new FrmAgregarUtil();
+            frmAgregarUtil.ShowDialog();
             cartuchera.EventoPrecio += CrearArchivo;
         }
 
