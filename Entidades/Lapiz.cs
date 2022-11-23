@@ -22,8 +22,11 @@ namespace Entidades
         }
 
         private eColor color;
+        private int id;
 
         public eColor Color { get => color; set => color = value; }
+
+        public int Id { get => id; }
 
         static Lapiz()
         {
@@ -31,14 +34,16 @@ namespace Entidades
             rutaBase = info.FullName;
         }
 
-        public Lapiz(string marca, decimal precio, eColor color) : base(marca, precio)
+        public Lapiz(int id, string marca, decimal precio, eColor color) : base(marca, precio)
         {
+            this.id = id;
             this.color = color;
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append($"ID: {this.id}");
             sb.AppendLine($"Util: {this.GetType()}");
             sb.AppendLine($"{base.ToString()}");
             sb.AppendLine($"Color: {this.color}");

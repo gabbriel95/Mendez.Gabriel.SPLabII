@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Entidades
 {
+    [XmlInclude(typeof(Lapiz))]
     public abstract class Utiles
     {
         private string marca;

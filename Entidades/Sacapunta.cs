@@ -15,17 +15,22 @@ namespace Entidades
         }
 
         private eTipo tipo;
+        private int id;
 
         public eTipo Tipo { get => tipo; set => tipo = value; }
+        public int Id { get => id; }
 
-        public Sacapunta(string marca, decimal precio, eTipo tipo):base(marca,precio)
+
+        public Sacapunta(int id, string marca, decimal precio, eTipo tipo):base(marca,precio)
         {
+            this.id = id;
             this.tipo = tipo;
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append($"ID: {this.id}");
             sb.AppendLine($"Util: {this.GetType()}");
             sb.AppendLine($"{base.ToString()}");
             sb.AppendLine($"Tipo: {this.tipo}");

@@ -13,9 +13,11 @@ namespace Entidades
 
         private List<T> utiles;
         private int capacidad;
+        private int id;
 
         public int Capacidad { get => capacidad; set => capacidad = value; }
         public List<T> Utiles { get => utiles; }
+        public int Id { get => id; }
         public decimal PrecioTotal 
         {
             get {
@@ -29,8 +31,9 @@ namespace Entidades
             }
         }
 
-        public Cartuchera(List<T> utiles, int capacidad)
+        public Cartuchera(int id, List<T> utiles, int capacidad)
         {
+            this.id = id;
             this.utiles = utiles;
             this.capacidad = capacidad;
         }
@@ -66,6 +69,7 @@ namespace Entidades
             }
             return sb.ToString();
         }
+
 
    
 
