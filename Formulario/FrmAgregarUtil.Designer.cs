@@ -52,6 +52,7 @@ namespace Formulario
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblCartuchera = new System.Windows.Forms.Label();
+            this.btnBorrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
@@ -242,11 +243,22 @@ namespace Formulario
             this.lblCartuchera.TabIndex = 19;
             this.lblCartuchera.Text = "Items de la cartuchera";
             // 
+            // btnBorrar
+            // 
+            this.btnBorrar.Location = new System.Drawing.Point(515, 107);
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Size = new System.Drawing.Size(155, 23);
+            this.btnBorrar.TabIndex = 20;
+            this.btnBorrar.Text = "Borrar util";
+            this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.lblCartuchera);
             this.Controls.Add(this.dgvCartuchera);
             this.Controls.Add(this.numericUpDownId);
@@ -264,6 +276,7 @@ namespace Formulario
             this.Controls.Add(this.textBoxMarca);
             this.Name = "FrmAgregarUtil";
             this.Text = "FrmAgregarUtil";
+            this.Load += new System.EventHandler(this.FrmAgregarUtil_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).EndInit();
@@ -296,5 +309,6 @@ namespace Formulario
         private System.Windows.Forms.DataGridViewTextBoxColumn Color;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tamanio;
         private System.Windows.Forms.Label lblCartuchera;
+        private System.Windows.Forms.Button btnBorrar;
     }
 }

@@ -11,7 +11,7 @@ namespace Entidades
     {
         private static SqlCommand comando;
         private static SqlConnection conexion;
-        private static SqlDataReader reader;
+        //private static SqlDataReader reader;
 
         static CartucheraDao()
         {
@@ -21,50 +21,7 @@ namespace Entidades
             comando.Connection = conexion;
         }
 
-        public static List<Utiles> ObtenerAllUtilesCartuchera(int idCartuchera) 
-        {
-
-            List<Utiles> utiles = new List<Utiles>();
-
-            try
-            {
-                conexion.Open();
-                comando.CommandText = $"SELECT * UTILESS WHERE id_cartuchera={idCartuchera}";
-                reader = comando.ExecuteReader();
-
-                while (reader.Read()) 
-                {
-                    if (reader["util"].ToString() == "Lapiz") 
-                    {
-                        utiles.Add(new Lapiz((int)reader["id"],reader["marca"].ToString(), (decimal)reader["precio"], (Lapiz.eColor)reader["color"]));
-                    }
-
-                    if (reader["util"].ToString() == "Goma")
-                    {
-                        utiles.Add(new Goma((int)reader["id"],reader["marca"].ToString(), (decimal)reader["precio"], (Goma.eTamanio)reader["tamanio"]));
-                    }
-
-                    if (reader["util"].ToString() == "Sacapunta")
-                    {
-                        utiles.Add(new Sacapunta((int)reader["id"],reader["marca"].ToString(), (decimal)reader["precio"], (Sacapunta.eTipo)reader["tipo"]));
-                    }
-
-
-                }
-
-
-                return utiles;
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message, ex);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-        }
+    
 
     }
 }

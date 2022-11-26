@@ -22,30 +22,27 @@ namespace Entidades
         }
 
         private eColor color;
-        private int id;
 
         public eColor Color { get => color; set => color = value; }
 
-        public int Id { get => id; }
 
         static Lapiz()
         {
             DirectoryInfo info = Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Archivos_Serializados\\");
             rutaBase = info.FullName;
         }
-        public Lapiz(int id, string marca, decimal precio, eColor color) : base(marca, precio)
+        public Lapiz(int id, string marca, decimal precio, eColor color, int idCartuchera) : base(id, marca, precio, idCartuchera)
         {
-            this.id = id;
             this.color = color;
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"ID: {this.id}");
             sb.AppendLine($"Util: {this.GetType()}");
             sb.AppendLine($"{base.ToString()}");
             sb.AppendLine($"Color: {this.color}");
+            sb.AppendLine($"id_cartuchera: {this.IdCartuchera}");
 
             return sb.ToString();
         }
