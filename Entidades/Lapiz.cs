@@ -31,6 +31,11 @@ namespace Entidades
             DirectoryInfo info = Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Archivos_Serializados\\");
             rutaBase = info.FullName;
         }
+
+        public Lapiz(string marca, decimal precio, eColor color, int idCartuchera) : base(marca, precio, idCartuchera)
+        {
+            this.color = color;
+        }
         public Lapiz(int id, string marca, decimal precio, eColor color, int idCartuchera) : base(id, marca, precio, idCartuchera)
         {
             this.color = color;

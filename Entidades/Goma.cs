@@ -19,6 +19,10 @@ namespace Entidades
 
         public eTamanio Tamanio { get => tamanio; set => tamanio = value; }
 
+        public Goma(string marca, decimal precio, eTamanio tamanio, int idCartuchera) : base(marca, precio, idCartuchera)
+        {
+            this.tamanio = tamanio;
+        }
 
         public Goma(int id, string marca, decimal precio, eTamanio tamanio, int idCartuchera): base(id, marca, precio, idCartuchera)
         {

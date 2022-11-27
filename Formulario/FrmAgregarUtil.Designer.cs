@@ -41,8 +41,6 @@ namespace Formulario
             this.radioButtonGoma = new System.Windows.Forms.RadioButton();
             this.radioButtonSacapunta = new System.Windows.Forms.RadioButton();
             this.numericPrecio = new System.Windows.Forms.NumericUpDown();
-            this.lblId = new System.Windows.Forms.Label();
-            this.numericUpDownId = new System.Windows.Forms.NumericUpDown();
             this.dgvCartuchera = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Util = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,8 +51,8 @@ namespace Formulario
             this.Tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblCartuchera = new System.Windows.Forms.Label();
             this.btnBorrar = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,22 +161,6 @@ namespace Formulario
             this.numericPrecio.Size = new System.Drawing.Size(120, 23);
             this.numericPrecio.TabIndex = 15;
             // 
-            // lblId
-            // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(309, 131);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(17, 15);
-            this.lblId.TabIndex = 16;
-            this.lblId.Text = "id";
-            // 
-            // numericUpDownId
-            // 
-            this.numericUpDownId.Location = new System.Drawing.Point(363, 129);
-            this.numericUpDownId.Name = "numericUpDownId";
-            this.numericUpDownId.Size = new System.Drawing.Size(120, 23);
-            this.numericUpDownId.TabIndex = 17;
-            // 
             // dgvCartuchera
             // 
             this.dgvCartuchera.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -195,6 +177,7 @@ namespace Formulario
             this.dgvCartuchera.RowTemplate.Height = 25;
             this.dgvCartuchera.Size = new System.Drawing.Size(742, 211);
             this.dgvCartuchera.TabIndex = 18;
+            this.dgvCartuchera.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCartuchera_CellContentClick);
             // 
             // id
             // 
@@ -253,16 +236,26 @@ namespace Formulario
             this.btnBorrar.UseVisualStyleBackColor = true;
             this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
+            // btnEditar
+            // 
+            this.btnEditar.Enabled = false;
+            this.btnEditar.Location = new System.Drawing.Point(515, 136);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(155, 23);
+            this.btnEditar.TabIndex = 21;
+            this.btnEditar.Text = "Modificar util";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.lblCartuchera);
             this.Controls.Add(this.dgvCartuchera);
-            this.Controls.Add(this.numericUpDownId);
-            this.Controls.Add(this.lblId);
             this.Controls.Add(this.numericPrecio);
             this.Controls.Add(this.radioButtonSacapunta);
             this.Controls.Add(this.radioButtonGoma);
@@ -278,7 +271,6 @@ namespace Formulario
             this.Text = "FrmAgregarUtil";
             this.Load += new System.EventHandler(this.FrmAgregarUtil_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -298,8 +290,6 @@ namespace Formulario
         private System.Windows.Forms.RadioButton radioButtonGoma;
         private System.Windows.Forms.RadioButton radioButtonSacapunta;
         private System.Windows.Forms.NumericUpDown numericPrecio;
-        private System.Windows.Forms.Label lblId;
-        private System.Windows.Forms.NumericUpDown numericUpDownId;
         private System.Windows.Forms.DataGridView dgvCartuchera;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Util;
@@ -310,5 +300,6 @@ namespace Formulario
         private System.Windows.Forms.DataGridViewTextBoxColumn Tamanio;
         private System.Windows.Forms.Label lblCartuchera;
         private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.Button btnEditar;
     }
 }

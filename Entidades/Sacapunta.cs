@@ -18,6 +18,12 @@ namespace Entidades
 
         public eTipo Tipo { get => tipo; set => tipo = value; }
 
+        public Sacapunta(string marca, decimal precio, eTipo tipo, int idCartuchera) : base(marca, precio, idCartuchera)
+        {
+            this.tipo = tipo;
+        }
+
+
         public Sacapunta(int id, string marca, decimal precio, eTipo tipo, int idCartuchera):base(id, marca,precio, idCartuchera)
         {
             this.tipo = tipo;

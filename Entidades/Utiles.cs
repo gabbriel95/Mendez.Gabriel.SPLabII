@@ -16,6 +16,13 @@ namespace Entidades
         public int IdCartuchera { get => idCartuchera; set => idCartuchera = value; }
         public int IdUtil { get => idUtil; set => idUtil = value; }
 
+        public Utiles(string marca, decimal precio, int idCartuchera)
+        {
+            this.marca = marca;
+            this.precio = precio;
+            this.idCartuchera = idCartuchera;
+        }
+
         public Utiles(int id, string marca, decimal precio, int idCartuchera)
         {
             this.idUtil = id;

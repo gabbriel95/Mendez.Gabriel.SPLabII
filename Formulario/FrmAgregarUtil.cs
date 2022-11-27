@@ -19,11 +19,12 @@ namespace Formulario
         Lapiz? lapiz;
         Goma? goma;
         Sacapunta? sacapunta;
+        private int indiceFilaDataGridView = 0;
 
         List<Utiles>? listaUtiles;
- 
 
-        static int eleccion =0;
+
+        static int eleccion = 0;
         public FrmAgregarUtil()
         {
             InitializeComponent();
@@ -67,12 +68,12 @@ namespace Formulario
         {
             int n = dgvCartuchera.Rows.Add();
 
-            switch (eleccion) 
+            switch (eleccion)
             {
                 case 1:
-                    lapiz = new Lapiz((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                    dgvCartuchera.Rows[n].Cells[0].Value = numericUpDownId.Value;
-                    dgvCartuchera.Rows[n].Cells[1].Value = "Lapiz" ;
+                    lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                    dgvCartuchera.Rows[n].Cells[0].Value = LapizDao.GetIdMaximo();
+                    dgvCartuchera.Rows[n].Cells[1].Value = "Lapiz";
                     dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
                     dgvCartuchera.Rows[n].Cells[3].Value = numericPrecio.Value;
                     dgvCartuchera.Rows[n].Cells[4].Value = null;
@@ -81,8 +82,8 @@ namespace Formulario
                     LapizDao.InsertarUtil(lapiz);
                     break;
                 case 2:
-                    goma = new Goma((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
-                    dgvCartuchera.Rows[n].Cells[0].Value = numericUpDownId.Value;
+                    goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
+                    dgvCartuchera.Rows[n].Cells[0].Value = goma.IdUtil;
                     dgvCartuchera.Rows[n].Cells[1].Value = "Goma";
                     dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
                     dgvCartuchera.Rows[n].Cells[3].Value = numericPrecio.Value;
@@ -90,11 +91,11 @@ namespace Formulario
                     dgvCartuchera.Rows[n].Cells[5].Value = null;
                     dgvCartuchera.Rows[n].Cells[6].Value = cbxCaracteristica.Text;
                     LapizDao.InsertarUtil(goma);
-         
+
                     break;
                 case 3:
-                    sacapunta = new Sacapunta((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
-                    dgvCartuchera.Rows[n].Cells[0].Value = numericUpDownId.Value;
+                    sacapunta = new Sacapunta(textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
+                    dgvCartuchera.Rows[n].Cells[0].Value = sacapunta.IdUtil;
                     dgvCartuchera.Rows[n].Cells[1].Value = "Sacapunta";
                     dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
                     dgvCartuchera.Rows[n].Cells[3].Value = numericPrecio.Value;
@@ -105,21 +106,18 @@ namespace Formulario
                     break;
             }
 
-  
-
-
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            LapizDao.EliminarUtil(1);
+            LapizDao.EliminarUtil((int)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[0].Value);
         }
 
         private void FrmAgregarUtil_Load(object sender, EventArgs e)
         {
             listaUtiles = LapizDao.LeerUtiles();
 
-            for (int i = 0; i < listaUtiles.Count; i++) 
+            for (int i = 0; i < listaUtiles.Count; i++)
             {
                 int n = dgvCartuchera.Rows.Add();
                 dgvCartuchera.Rows[n].Cells[0].Value = listaUtiles[i].IdUtil;
@@ -142,8 +140,8 @@ namespace Formulario
                     Goma goma = (Goma)listaUtiles[i];
                     this.CargarDataGrid(n, 6, goma.Tamanio.ToString());
                 }
-            } 
-            
+            }
+
         }
 
         private void CargarDataGrid(int iCol, int iCell, string atributo)
@@ -151,5 +149,48 @@ namespace Formulario
             dgvCartuchera.Rows[iCol].Cells[iCell].Value = atributo;
 
         }
+
+        private void dgvCartuchera_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            indiceFilaDataGridView = e.RowIndex;
+            btnEditar.Enabled = true;
+            if (indiceFilaDataGridView != -1)
+            {
+                if (dgvCartuchera.Rows[indiceFilaDataGridView].Cells[1].Value.ToString() == typeof(Lapiz).ToString())
+                {
+                    radioButtonLapiz.Checked = true;
+                    cbxCaracteristica.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[5].Value.ToString();
+                }
+                if (dgvCartuchera.Rows[indiceFilaDataGridView].Cells[1].Value.ToString() == typeof(Goma).ToString())
+                {
+                    radioButtonGoma.Checked = true;
+                    cbxCaracteristica.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[6].Value.ToString();
+
+                }
+                if (dgvCartuchera.Rows[indiceFilaDataGridView].Cells[1].Value.ToString() == typeof(Sacapunta).ToString())
+                {
+                    radioButtonSacapunta.Checked = true;
+                    cbxCaracteristica.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[4].Value.ToString();
+
+                }
+            }
+
+            textBoxMarca.Text = (string)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[2].Value;
+            numericPrecio.Value = (decimal)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[3].Value;
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+        
+                lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                LapizDao.ModificarUtil(lapiz);
+            
+            /*goma = new Goma((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
+            LapizDao.ModificarUtil(goma);
+            sacapunta = new Sacapunta((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
+            LapizDao.ModificarUtil(sacapunta);*/
+        }
+
     }
 }
+

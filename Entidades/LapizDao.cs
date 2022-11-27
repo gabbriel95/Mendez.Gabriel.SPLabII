@@ -27,8 +27,6 @@ namespace Entidades
         public static List<Utiles> LeerUtiles() 
         {
             List<Utiles> listaUtiles = new List<Utiles>();
-            // List<Goma> listGoma = new List<Goma>();
-           //  List<Lapiz> lista
 
             try
             {
@@ -40,7 +38,7 @@ namespace Entidades
                 {
                     if (reader["util"].ToString() == "Entidades.Lapiz")
                     {
-                        listaUtiles.Add(new Lapiz((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (eColor)Enum.Parse(typeof(eColor), (string)reader["color"]), (int)reader["id_cartuchera"]));
+                        listaUtiles.Add(new Lapiz((int)reader["id"] , reader["marca"].ToString(), (decimal)reader["precio"], (eColor)Enum.Parse(typeof(eColor), (string)reader["color"]), (int)reader["id_cartuchera"]));
                     }
                     else if (reader["util"].ToString() == "Entidades.Goma")
                     {
@@ -170,5 +168,75 @@ namespace Entidades
                 conexion.Close();
             }
         }
+
+        public static void ModificarUtil(Goma goma)
+        {
+            try
+            {
+                comando.Parameters.Clear();
+                conexion.Open();
+                comando.CommandText = $"UPDATE UTILESS SET util='{goma.GetType()}', marca = '{goma.Marca}', precio = {goma.Precio},tipo = null, color = null, tamanio = '{goma.Tamanio}', id_cartuchera = {goma.IdCartuchera} WHERE id = {goma.IdUtil}";
+
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public static void ModificarUtil(Sacapunta sacapunta)
+        {
+            try
+            {
+                comando.Parameters.Clear();
+                conexion.Open();
+                comando.CommandText = $"UPDATE UTILESS SET util='{sacapunta.GetType()}', marca = '{sacapunta.Marca}', precio = {sacapunta.Precio},tipo = '{sacapunta.Tipo}', color = null, tamanio = null, id_cartuchera = {sacapunta.IdCartuchera} WHERE id = {sacapunta.IdUtil}";
+
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public static int GetIdMaximo() 
+        {
+            int id = 0;
+            try
+            {
+                conexion.Open();
+                comando.CommandText = "SELECT * FROM UTILESS";
+                reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id = (int)reader["id"];      
+                }
+
+                return id + 1;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
     }
 }
