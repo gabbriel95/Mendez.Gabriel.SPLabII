@@ -53,6 +53,9 @@ namespace Formulario
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.txtBoxId = new System.Windows.Forms.TextBox();
+            this.btnSerializarXML = new System.Windows.Forms.Button();
+            this.btnDeserializarXML = new System.Windows.Forms.Button();
+            this.lblId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +88,7 @@ namespace Formulario
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(278, 83);
+            this.label3.Location = new System.Drawing.Point(240, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 15);
             this.label3.TabIndex = 3;
@@ -104,14 +107,14 @@ namespace Formulario
             // 
             this.cbxCaracteristica.Enabled = false;
             this.cbxCaracteristica.FormattingEnabled = true;
-            this.cbxCaracteristica.Location = new System.Drawing.Point(362, 75);
+            this.cbxCaracteristica.Location = new System.Drawing.Point(324, 75);
             this.cbxCaracteristica.Name = "cbxCaracteristica";
             this.cbxCaracteristica.Size = new System.Drawing.Size(121, 23);
             this.cbxCaracteristica.TabIndex = 6;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(515, 78);
+            this.btnAgregar.Location = new System.Drawing.Point(515, 52);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(155, 23);
             this.btnAgregar.TabIndex = 8;
@@ -173,7 +176,7 @@ namespace Formulario
             this.Tipo,
             this.Color,
             this.Tamanio});
-            this.dgvCartuchera.Location = new System.Drawing.Point(12, 216);
+            this.dgvCartuchera.Location = new System.Drawing.Point(31, 227);
             this.dgvCartuchera.Name = "dgvCartuchera";
             this.dgvCartuchera.RowTemplate.Height = 25;
             this.dgvCartuchera.Size = new System.Drawing.Size(742, 211);
@@ -229,7 +232,7 @@ namespace Formulario
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(515, 107);
+            this.btnBorrar.Location = new System.Drawing.Point(515, 83);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(155, 23);
             this.btnBorrar.TabIndex = 20;
@@ -240,7 +243,7 @@ namespace Formulario
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(515, 136);
+            this.btnEditar.Location = new System.Drawing.Point(515, 112);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(155, 23);
             this.btnEditar.TabIndex = 21;
@@ -250,16 +253,50 @@ namespace Formulario
             // 
             // txtBoxId
             // 
-            this.txtBoxId.Location = new System.Drawing.Point(326, 125);
+            this.txtBoxId.Location = new System.Drawing.Point(265, 122);
             this.txtBoxId.Name = "txtBoxId";
-            this.txtBoxId.Size = new System.Drawing.Size(100, 23);
+            this.txtBoxId.Size = new System.Drawing.Size(48, 23);
             this.txtBoxId.TabIndex = 22;
+            // 
+            // btnSerializarXML
+            // 
+            this.btnSerializarXML.Enabled = false;
+            this.btnSerializarXML.Location = new System.Drawing.Point(515, 151);
+            this.btnSerializarXML.Name = "btnSerializarXML";
+            this.btnSerializarXML.Size = new System.Drawing.Size(155, 23);
+            this.btnSerializarXML.TabIndex = 23;
+            this.btnSerializarXML.Text = "Serializar Lapiz XML";
+            this.btnSerializarXML.UseVisualStyleBackColor = true;
+            this.btnSerializarXML.Click += new System.EventHandler(this.btnSerializarXML_Click);
+            // 
+            // btnDeserializarXML
+            // 
+            this.btnDeserializarXML.Enabled = false;
+            this.btnDeserializarXML.Location = new System.Drawing.Point(515, 180);
+            this.btnDeserializarXML.Name = "btnDeserializarXML";
+            this.btnDeserializarXML.Size = new System.Drawing.Size(155, 23);
+            this.btnDeserializarXML.TabIndex = 24;
+            this.btnDeserializarXML.Text = "Deserializar Lapiz XML";
+            this.btnDeserializarXML.UseVisualStyleBackColor = true;
+            this.btnDeserializarXML.Click += new System.EventHandler(this.btnDeserializarXML_Click);
+            // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(241, 125);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(18, 15);
+            this.lblId.TabIndex = 25;
+            this.lblId.Text = "ID";
             // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblId);
+            this.Controls.Add(this.btnDeserializarXML);
+            this.Controls.Add(this.btnSerializarXML);
             this.Controls.Add(this.txtBoxId);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnBorrar);
@@ -311,5 +348,8 @@ namespace Formulario
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.TextBox txtBoxId;
+        private System.Windows.Forms.Button btnSerializarXML;
+        private System.Windows.Forms.Button btnDeserializarXML;
+        private System.Windows.Forms.Label lblId;
     }
 }

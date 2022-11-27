@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.btnAnadirUtil = new System.Windows.Forms.Button();
-            this.btnSerializarXML = new System.Windows.Forms.Button();
-            this.btnDeserializarXML = new System.Windows.Forms.Button();
             this.btnDeserializarJson = new System.Windows.Forms.Button();
             this.btnLeerArchivo = new System.Windows.Forms.Button();
             this.btnSerializarJson = new System.Windows.Forms.Button();
@@ -47,24 +45,6 @@
             this.btnAnadirUtil.Text = "Nuevo Util";
             this.btnAnadirUtil.UseVisualStyleBackColor = true;
             this.btnAnadirUtil.Click += new System.EventHandler(this.btnAnadirUtil_Click);
-            // 
-            // btnSerializarXML
-            // 
-            this.btnSerializarXML.Location = new System.Drawing.Point(181, 53);
-            this.btnSerializarXML.Name = "btnSerializarXML";
-            this.btnSerializarXML.Size = new System.Drawing.Size(137, 59);
-            this.btnSerializarXML.TabIndex = 2;
-            this.btnSerializarXML.Text = "Serializar Lapiz XML";
-            this.btnSerializarXML.UseVisualStyleBackColor = true;
-            // 
-            // btnDeserializarXML
-            // 
-            this.btnDeserializarXML.Location = new System.Drawing.Point(183, 140);
-            this.btnDeserializarXML.Name = "btnDeserializarXML";
-            this.btnDeserializarXML.Size = new System.Drawing.Size(135, 64);
-            this.btnDeserializarXML.TabIndex = 3;
-            this.btnDeserializarXML.Text = "Deserializar Lapiz XML";
-            this.btnDeserializarXML.UseVisualStyleBackColor = true;
             // 
             // btnDeserializarJson
             // 
@@ -121,8 +101,6 @@
             this.Controls.Add(this.btnSerializarJson);
             this.Controls.Add(this.btnLeerArchivo);
             this.Controls.Add(this.btnDeserializarJson);
-            this.Controls.Add(this.btnDeserializarXML);
-            this.Controls.Add(this.btnSerializarXML);
             this.Controls.Add(this.btnAnadirUtil);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -133,8 +111,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnAnadirUtil;
-        private System.Windows.Forms.Button btnSerializarXML;
-        private System.Windows.Forms.Button btnDeserializarXML;
         private System.Windows.Forms.Button btnDeserializarJson;
         private System.Windows.Forms.Button btnLeerArchivo;
         private System.Windows.Forms.Button btnSerializarJson;

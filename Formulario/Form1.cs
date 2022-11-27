@@ -35,6 +35,5 @@ namespace Formulario
             GestorDeArchivos.CrearArchivo("tickets.txt", cartuchera.ToString(), true);
         }
 
-      
     }
 }

@@ -35,6 +35,7 @@ namespace Formulario
         {
             this.cbxCaracteristica.Enabled = true;
             this.cbxCaracteristica.Items.Clear();
+            this.btnSerializarXML.Enabled = true;
             this.cbxCaracteristica.Items.AddRange(new object[] {
             Entidades.Lapiz.eColor.Rojo,
             Entidades.Lapiz.eColor.Negro,
@@ -182,7 +183,7 @@ namespace Formulario
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (radioButtonLapiz.Checked) 
+            if (radioButtonLapiz.Checked)
             {
                 lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
 
@@ -195,15 +196,39 @@ namespace Formulario
                 LapizDao.ModificarUtil(goma, int.Parse(txtBoxId.Text));
             }
 
-            if (radioButtonSacapunta.Checked) 
+            if (radioButtonSacapunta.Checked)
             {
                 sacapunta = new Sacapunta(textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
                 LapizDao.ModificarUtil(sacapunta, int.Parse(txtBoxId.Text));
             }
-           
-        
+
+
         }
 
+        private void btnSerializarXML_Click(object sender, EventArgs e)
+        {
+            if (radioButtonLapiz.Checked == true)
+            {
+                btnSerializarXML.Enabled = true;
+                lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                ISerializa.Serializar_XmlTextWritter("lapiz", lapiz);
+                btnDeserializarXML.Enabled = true;
+            }
+
+        }
+
+        private void btnDeserializarXML_Click(object sender, EventArgs e)
+        {
+            btnSerializarXML.Enabled = true;
+            lapiz = IDeserializa.Deserializar_xmlTextReader("lapiz");
+
+            radioButtonLapiz.Checked = true;
+            textBoxMarca.Text = lapiz.Marca;
+            numericPrecio.Value= lapiz.Precio;
+            cbxCaracteristica.Text = lapiz.Color.ToString();
+            txtBoxId.Text = lapiz.IdUtil.ToString();
+           
+        }
     }
 }
 

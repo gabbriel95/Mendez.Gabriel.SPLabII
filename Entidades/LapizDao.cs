@@ -23,8 +23,33 @@ namespace Entidades
             comando.CommandType = System.Data.CommandType.Text;
             comando.Connection = conexion;
         }
+        /*public static Lapiz LeerLapiz()
+        {
+            Lapiz lapiz;
+            try
+            {
+                conexion.Open();
+                comando.CommandText = $"SELECT * FROM UTILESS WHERE id=lapiz.IdUtil}";
+                reader = comando.ExecuteReader();
 
-        public static List<Utiles> LeerUtiles() 
+
+                lapiz = new Lapiz((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (eColor)Enum.Parse(typeof(eColor), (string)reader["color"]), (int)reader["id_cartuchera"]);
+
+
+                return lapiz;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }*/
+
+        public static List<Utiles> LeerUtiles()
         {
             List<Utiles> listaUtiles = new List<Utiles>();
 
@@ -34,11 +59,11 @@ namespace Entidades
                 comando.CommandText = "SELECT * FROM UTILESS";
                 reader = comando.ExecuteReader();
 
-                while (reader.Read()) 
+                while (reader.Read())
                 {
                     if (reader["util"].ToString() == "Entidades.Lapiz")
                     {
-                        listaUtiles.Add(new Lapiz((int)reader["id"] , reader["marca"].ToString(), (decimal)reader["precio"], (eColor)Enum.Parse(typeof(eColor), (string)reader["color"]), (int)reader["id_cartuchera"]));
+                        listaUtiles.Add(new Lapiz((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (eColor)Enum.Parse(typeof(eColor), (string)reader["color"]), (int)reader["id_cartuchera"]));
                     }
                     else if (reader["util"].ToString() == "Entidades.Goma")
                     {
@@ -51,7 +76,7 @@ namespace Entidades
                 }
 
                 return listaUtiles;
-                
+
             }
             catch (Exception ex)
             {
@@ -73,7 +98,7 @@ namespace Entidades
 
 
                 comando.ExecuteNonQuery();
-                
+
             }
             catch (Exception ex)
             {
@@ -93,7 +118,7 @@ namespace Entidades
 
 
                 comando.ExecuteNonQuery();
-      
+
             }
             catch (Exception ex)
             {
@@ -114,7 +139,7 @@ namespace Entidades
 
 
                 comando.ExecuteNonQuery();
-        
+
             }
             catch (Exception ex)
             {
@@ -136,7 +161,7 @@ namespace Entidades
                 comando.CommandText = $"DELETE FROM UTILESS WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
-      
+
             }
             catch (Exception ex)
             {
@@ -155,7 +180,7 @@ namespace Entidades
                 comando.Parameters.Clear();
                 conexion.Open();
                 comando.CommandText = $"UPDATE UTILESS SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera} WHERE id = {id}";
-               
+
                 comando.ExecuteNonQuery();
 
             }
@@ -211,7 +236,7 @@ namespace Entidades
             }
         }
 
-        public static int GetIdMaximo() 
+        public static int GetIdMaximo()
         {
             int id = 0;
             try
@@ -222,7 +247,7 @@ namespace Entidades
 
                 while (reader.Read())
                 {
-                    id = (int)reader["id"];      
+                    id = (int)reader["id"];
                 }
 
                 return id + 1;
