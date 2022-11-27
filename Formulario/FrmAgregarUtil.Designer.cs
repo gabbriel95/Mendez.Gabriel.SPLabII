@@ -56,6 +56,8 @@ namespace Formulario
             this.btnSerializarXML = new System.Windows.Forms.Button();
             this.btnDeserializarXML = new System.Windows.Forms.Button();
             this.lblId = new System.Windows.Forms.Label();
+            this.btnSerializarJson = new System.Windows.Forms.Button();
+            this.btnDeserializarJson = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
@@ -114,7 +116,7 @@ namespace Formulario
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(515, 52);
+            this.btnAgregar.Location = new System.Drawing.Point(471, 12);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(155, 23);
             this.btnAgregar.TabIndex = 8;
@@ -232,7 +234,7 @@ namespace Formulario
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(515, 83);
+            this.btnBorrar.Location = new System.Drawing.Point(471, 41);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(155, 23);
             this.btnBorrar.TabIndex = 20;
@@ -243,7 +245,7 @@ namespace Formulario
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(515, 112);
+            this.btnEditar.Location = new System.Drawing.Point(471, 70);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(155, 23);
             this.btnEditar.TabIndex = 21;
@@ -260,8 +262,7 @@ namespace Formulario
             // 
             // btnSerializarXML
             // 
-            this.btnSerializarXML.Enabled = false;
-            this.btnSerializarXML.Location = new System.Drawing.Point(515, 151);
+            this.btnSerializarXML.Location = new System.Drawing.Point(471, 99);
             this.btnSerializarXML.Name = "btnSerializarXML";
             this.btnSerializarXML.Size = new System.Drawing.Size(155, 23);
             this.btnSerializarXML.TabIndex = 23;
@@ -271,8 +272,7 @@ namespace Formulario
             // 
             // btnDeserializarXML
             // 
-            this.btnDeserializarXML.Enabled = false;
-            this.btnDeserializarXML.Location = new System.Drawing.Point(515, 180);
+            this.btnDeserializarXML.Location = new System.Drawing.Point(471, 128);
             this.btnDeserializarXML.Name = "btnDeserializarXML";
             this.btnDeserializarXML.Size = new System.Drawing.Size(155, 23);
             this.btnDeserializarXML.TabIndex = 24;
@@ -289,11 +289,33 @@ namespace Formulario
             this.lblId.TabIndex = 25;
             this.lblId.Text = "ID";
             // 
+            // btnSerializarJson
+            // 
+            this.btnSerializarJson.Location = new System.Drawing.Point(471, 157);
+            this.btnSerializarJson.Name = "btnSerializarJson";
+            this.btnSerializarJson.Size = new System.Drawing.Size(155, 23);
+            this.btnSerializarJson.TabIndex = 26;
+            this.btnSerializarJson.Text = "Serializar Lapiz JSON";
+            this.btnSerializarJson.UseVisualStyleBackColor = true;
+            this.btnSerializarJson.Click += new System.EventHandler(this.btnSerializarJson_Click);
+            // 
+            // btnDeserializarJson
+            // 
+            this.btnDeserializarJson.Location = new System.Drawing.Point(471, 186);
+            this.btnDeserializarJson.Name = "btnDeserializarJson";
+            this.btnDeserializarJson.Size = new System.Drawing.Size(155, 22);
+            this.btnDeserializarJson.TabIndex = 27;
+            this.btnDeserializarJson.Text = "Deserializar Lapiz Json";
+            this.btnDeserializarJson.UseVisualStyleBackColor = true;
+            this.btnDeserializarJson.Click += new System.EventHandler(this.btnDeserializarJson_Click);
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnDeserializarJson);
+            this.Controls.Add(this.btnSerializarJson);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.btnDeserializarXML);
             this.Controls.Add(this.btnSerializarXML);
@@ -351,5 +373,7 @@ namespace Formulario
         private System.Windows.Forms.Button btnSerializarXML;
         private System.Windows.Forms.Button btnDeserializarXML;
         private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.Button btnSerializarJson;
+        private System.Windows.Forms.Button btnDeserializarJson;
     }
 }

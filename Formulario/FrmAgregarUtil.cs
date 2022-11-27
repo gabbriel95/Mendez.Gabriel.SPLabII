@@ -35,7 +35,6 @@ namespace Formulario
         {
             this.cbxCaracteristica.Enabled = true;
             this.cbxCaracteristica.Items.Clear();
-            this.btnSerializarXML.Enabled = true;
             this.cbxCaracteristica.Items.AddRange(new object[] {
             Entidades.Lapiz.eColor.Rojo,
             Entidades.Lapiz.eColor.Negro,
@@ -207,27 +206,38 @@ namespace Formulario
 
         private void btnSerializarXML_Click(object sender, EventArgs e)
         {
-            if (radioButtonLapiz.Checked == true)
-            {
-                btnSerializarXML.Enabled = true;
-                lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                ISerializa.Serializar_XmlTextWritter("lapiz", lapiz);
-                btnDeserializarXML.Enabled = true;
-            }
 
+            lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+            ISerializa.Serializar_XmlTextWritter("lapizXML", lapiz);
+            btnDeserializarXML.Enabled = true;
         }
 
         private void btnDeserializarXML_Click(object sender, EventArgs e)
         {
-            btnSerializarXML.Enabled = true;
-            lapiz = IDeserializa.Deserializar_xmlTextReader("lapiz");
-
+            lapiz = IDeserializa.Deserializar_xmlTextReader("lapizXML");
             radioButtonLapiz.Checked = true;
             textBoxMarca.Text = lapiz.Marca;
-            numericPrecio.Value= lapiz.Precio;
+            numericPrecio.Value = lapiz.Precio;
             cbxCaracteristica.Text = lapiz.Color.ToString();
             txtBoxId.Text = lapiz.IdUtil.ToString();
-           
+
+        }
+
+        private void btnSerializarJson_Click(object sender, EventArgs e)
+        {
+            lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+            ISerializa.Serializar_JSON("lapizJson", lapiz);
+            btnDeserializarJson.Enabled = true;
+        }
+
+        private void btnDeserializarJson_Click(object sender, EventArgs e)
+        {
+            lapiz = IDeserializa.DesSerializar_JSON("lapizJson");
+            radioButtonLapiz.Checked = true;
+            textBoxMarca.Text = lapiz.Marca;
+            numericPrecio.Value = lapiz.Precio;
+            cbxCaracteristica.Text = lapiz.Color.ToString();
+            txtBoxId.Text = lapiz.IdUtil.ToString();
         }
     }
 }
