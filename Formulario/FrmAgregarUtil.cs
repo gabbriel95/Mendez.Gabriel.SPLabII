@@ -182,16 +182,26 @@ namespace Formulario
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+            if (radioButtonLapiz.Checked) 
+            {
+                lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
 
-            LapizDao.ModificarUtil(lapiz);
-            
-          
+                LapizDao.ModificarUtil(lapiz, int.Parse(txtBoxId.Text));
+            }
+
+            if (radioButtonGoma.Checked)
+            {
+                goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
+                LapizDao.ModificarUtil(goma, int.Parse(txtBoxId.Text));
+            }
+
+            if (radioButtonSacapunta.Checked) 
+            {
+                sacapunta = new Sacapunta(textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
+                LapizDao.ModificarUtil(sacapunta, int.Parse(txtBoxId.Text));
+            }
            
-           /*goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
-            LapizDao.ModificarUtil(goma);
-            sacapunta = new Sacapunta((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
-            LapizDao.ModificarUtil(sacapunta);*/
+        
         }
 
     }

@@ -148,13 +148,13 @@ namespace Entidades
             }
         }
 
-        public static void ModificarUtil(Lapiz lapiz)
+        public static void ModificarUtil(Lapiz lapiz, int id)
         {
             try
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera} WHERE id = 26";
+                comando.CommandText = $"UPDATE UTILESS SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera} WHERE id = {id}";
                
                 comando.ExecuteNonQuery();
 
@@ -169,13 +169,13 @@ namespace Entidades
             }
         }
 
-        public static void ModificarUtil(Goma goma)
+        public static void ModificarUtil(Goma goma, int id)
         {
             try
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{goma.GetType()}', marca = '{goma.Marca}', precio = {goma.Precio},tipo = null, color = null, tamanio = '{goma.Tamanio}', id_cartuchera = {goma.IdCartuchera} WHERE id = {goma.IdUtil}";
+                comando.CommandText = $"UPDATE UTILESS SET util='{goma.GetType()}', marca = '{goma.Marca}', precio = {goma.Precio},tipo = null, color = null, tamanio = '{goma.Tamanio}', id_cartuchera = {goma.IdCartuchera} WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
 
@@ -190,13 +190,13 @@ namespace Entidades
             }
         }
 
-        public static void ModificarUtil(Sacapunta sacapunta)
+        public static void ModificarUtil(Sacapunta sacapunta, int id)
         {
             try
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{sacapunta.GetType()}', marca = '{sacapunta.Marca}', precio = {sacapunta.Precio},tipo = '{sacapunta.Tipo}', color = null, tamanio = null, id_cartuchera = {sacapunta.IdCartuchera} WHERE id = {sacapunta.IdUtil}";
+                comando.CommandText = $"UPDATE UTILESS SET util='{sacapunta.GetType()}', marca = '{sacapunta.Marca}', precio = {sacapunta.Precio},tipo = '{sacapunta.Tipo}', color = null, tamanio = null, id_cartuchera = {sacapunta.IdCartuchera} WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
 
