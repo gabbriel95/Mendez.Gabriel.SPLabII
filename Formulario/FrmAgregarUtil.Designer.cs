@@ -52,6 +52,7 @@ namespace Formulario
             this.lblCartuchera = new System.Windows.Forms.Label();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
+            this.txtBoxId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
@@ -247,11 +248,19 @@ namespace Formulario
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
+            // txtBoxId
+            // 
+            this.txtBoxId.Location = new System.Drawing.Point(326, 125);
+            this.txtBoxId.Name = "txtBoxId";
+            this.txtBoxId.Size = new System.Drawing.Size(100, 23);
+            this.txtBoxId.TabIndex = 22;
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtBoxId);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.lblCartuchera);
@@ -301,5 +310,6 @@ namespace Formulario
         private System.Windows.Forms.Label lblCartuchera;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.TextBox txtBoxId;
     }
 }

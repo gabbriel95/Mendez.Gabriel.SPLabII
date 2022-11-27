@@ -154,7 +154,7 @@ namespace Entidades
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera} WHERE id = {lapiz.IdUtil}";
+                comando.CommandText = $"UPDATE UTILESS SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera} WHERE id = 26";
                
                 comando.ExecuteNonQuery();
 

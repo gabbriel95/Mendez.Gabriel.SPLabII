@@ -154,6 +154,7 @@ namespace Formulario
         {
             indiceFilaDataGridView = e.RowIndex;
             btnEditar.Enabled = true;
+            txtBoxId.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[0].Value.ToString();
             if (indiceFilaDataGridView != -1)
             {
                 if (dgvCartuchera.Rows[indiceFilaDataGridView].Cells[1].Value.ToString() == typeof(Lapiz).ToString())
@@ -181,11 +182,13 @@ namespace Formulario
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-        
-                lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                LapizDao.ModificarUtil(lapiz);
+            lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+
+            LapizDao.ModificarUtil(lapiz);
             
-            /*goma = new Goma((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
+          
+           
+           /*goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), 1);
             LapizDao.ModificarUtil(goma);
             sacapunta = new Sacapunta((int)numericUpDownId.Value, textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), 1);
             LapizDao.ModificarUtil(sacapunta);*/
