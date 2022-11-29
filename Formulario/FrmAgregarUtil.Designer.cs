@@ -49,7 +49,7 @@ namespace Formulario
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCartuchera = new System.Windows.Forms.Label();
+            this.idCartuchera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.txtBoxId = new System.Windows.Forms.TextBox();
@@ -58,13 +58,15 @@ namespace Formulario
             this.lblId = new System.Windows.Forms.Label();
             this.btnSerializarJson = new System.Windows.Forms.Button();
             this.btnDeserializarJson = new System.Windows.Forms.Button();
+            this.lblIdCartuchera = new System.Windows.Forms.Label();
+            this.txtBoxIdCartuchera = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxMarca
             // 
-            this.textBoxMarca.Location = new System.Drawing.Point(114, 75);
+            this.textBoxMarca.Location = new System.Drawing.Point(78, 37);
             this.textBoxMarca.Name = "textBoxMarca";
             this.textBoxMarca.Size = new System.Drawing.Size(121, 23);
             this.textBoxMarca.TabIndex = 0;
@@ -72,7 +74,7 @@ namespace Formulario
             // lblUtil
             // 
             this.lblUtil.AutoSize = true;
-            this.lblUtil.Location = new System.Drawing.Point(70, 27);
+            this.lblUtil.Location = new System.Drawing.Point(12, 9);
             this.lblUtil.Name = "lblUtil";
             this.lblUtil.Size = new System.Drawing.Size(25, 15);
             this.lblUtil.TabIndex = 1;
@@ -81,7 +83,7 @@ namespace Formulario
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(55, 78);
+            this.lblMarca.Location = new System.Drawing.Point(12, 45);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(40, 15);
             this.lblMarca.TabIndex = 2;
@@ -90,7 +92,7 @@ namespace Formulario
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(240, 78);
+            this.label3.Location = new System.Drawing.Point(12, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 15);
             this.label3.TabIndex = 3;
@@ -99,7 +101,7 @@ namespace Formulario
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(55, 125);
+            this.lblPrecio.Location = new System.Drawing.Point(12, 107);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(40, 15);
             this.lblPrecio.TabIndex = 4;
@@ -109,14 +111,14 @@ namespace Formulario
             // 
             this.cbxCaracteristica.Enabled = false;
             this.cbxCaracteristica.FormattingEnabled = true;
-            this.cbxCaracteristica.Location = new System.Drawing.Point(324, 75);
+            this.cbxCaracteristica.Location = new System.Drawing.Point(96, 66);
             this.cbxCaracteristica.Name = "cbxCaracteristica";
             this.cbxCaracteristica.Size = new System.Drawing.Size(121, 23);
             this.cbxCaracteristica.TabIndex = 6;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(471, 12);
+            this.btnAgregar.Location = new System.Drawing.Point(284, 21);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(155, 23);
             this.btnAgregar.TabIndex = 8;
@@ -127,7 +129,7 @@ namespace Formulario
             // radioButtonLapiz
             // 
             this.radioButtonLapiz.AutoSize = true;
-            this.radioButtonLapiz.Location = new System.Drawing.Point(142, 27);
+            this.radioButtonLapiz.Location = new System.Drawing.Point(55, 5);
             this.radioButtonLapiz.Name = "radioButtonLapiz";
             this.radioButtonLapiz.Size = new System.Drawing.Size(52, 19);
             this.radioButtonLapiz.TabIndex = 12;
@@ -139,7 +141,7 @@ namespace Formulario
             // radioButtonGoma
             // 
             this.radioButtonGoma.AutoSize = true;
-            this.radioButtonGoma.Location = new System.Drawing.Point(240, 27);
+            this.radioButtonGoma.Location = new System.Drawing.Point(115, 5);
             this.radioButtonGoma.Name = "radioButtonGoma";
             this.radioButtonGoma.Size = new System.Drawing.Size(57, 19);
             this.radioButtonGoma.TabIndex = 13;
@@ -151,7 +153,7 @@ namespace Formulario
             // radioButtonSacapunta
             // 
             this.radioButtonSacapunta.AutoSize = true;
-            this.radioButtonSacapunta.Location = new System.Drawing.Point(326, 27);
+            this.radioButtonSacapunta.Location = new System.Drawing.Point(179, 5);
             this.radioButtonSacapunta.Name = "radioButtonSacapunta";
             this.radioButtonSacapunta.Size = new System.Drawing.Size(80, 19);
             this.radioButtonSacapunta.TabIndex = 14;
@@ -162,7 +164,7 @@ namespace Formulario
             // 
             // numericPrecio
             // 
-            this.numericPrecio.Location = new System.Drawing.Point(115, 123);
+            this.numericPrecio.Location = new System.Drawing.Point(67, 101);
             this.numericPrecio.Name = "numericPrecio";
             this.numericPrecio.Size = new System.Drawing.Size(120, 23);
             this.numericPrecio.TabIndex = 15;
@@ -177,11 +179,12 @@ namespace Formulario
             this.Precio,
             this.Tipo,
             this.Color,
-            this.Tamanio});
-            this.dgvCartuchera.Location = new System.Drawing.Point(31, 227);
+            this.Tamanio,
+            this.idCartuchera});
+            this.dgvCartuchera.Location = new System.Drawing.Point(0, 223);
             this.dgvCartuchera.Name = "dgvCartuchera";
             this.dgvCartuchera.RowTemplate.Height = 25;
-            this.dgvCartuchera.Size = new System.Drawing.Size(742, 211);
+            this.dgvCartuchera.Size = new System.Drawing.Size(796, 211);
             this.dgvCartuchera.TabIndex = 18;
             this.dgvCartuchera.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCartuchera_CellContentClick);
             // 
@@ -223,18 +226,14 @@ namespace Formulario
             this.Tamanio.HeaderText = "Tamanio Goma";
             this.Tamanio.Name = "Tamanio";
             // 
-            // lblCartuchera
+            // idCartuchera
             // 
-            this.lblCartuchera.AutoSize = true;
-            this.lblCartuchera.Location = new System.Drawing.Point(21, 186);
-            this.lblCartuchera.Name = "lblCartuchera";
-            this.lblCartuchera.Size = new System.Drawing.Size(123, 15);
-            this.lblCartuchera.TabIndex = 19;
-            this.lblCartuchera.Text = "Items de la cartuchera";
+            this.idCartuchera.HeaderText = "ID cartuchera";
+            this.idCartuchera.Name = "idCartuchera";
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(471, 41);
+            this.btnBorrar.Location = new System.Drawing.Point(284, 50);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(155, 23);
             this.btnBorrar.TabIndex = 20;
@@ -245,7 +244,7 @@ namespace Formulario
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(471, 70);
+            this.btnEditar.Location = new System.Drawing.Point(284, 79);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(155, 23);
             this.btnEditar.TabIndex = 21;
@@ -255,14 +254,15 @@ namespace Formulario
             // 
             // txtBoxId
             // 
-            this.txtBoxId.Location = new System.Drawing.Point(265, 122);
+            this.txtBoxId.Location = new System.Drawing.Point(42, 130);
             this.txtBoxId.Name = "txtBoxId";
+            this.txtBoxId.ReadOnly = true;
             this.txtBoxId.Size = new System.Drawing.Size(48, 23);
             this.txtBoxId.TabIndex = 22;
             // 
             // btnSerializarXML
             // 
-            this.btnSerializarXML.Location = new System.Drawing.Point(471, 99);
+            this.btnSerializarXML.Location = new System.Drawing.Point(284, 108);
             this.btnSerializarXML.Name = "btnSerializarXML";
             this.btnSerializarXML.Size = new System.Drawing.Size(155, 23);
             this.btnSerializarXML.TabIndex = 23;
@@ -272,7 +272,7 @@ namespace Formulario
             // 
             // btnDeserializarXML
             // 
-            this.btnDeserializarXML.Location = new System.Drawing.Point(471, 128);
+            this.btnDeserializarXML.Location = new System.Drawing.Point(284, 137);
             this.btnDeserializarXML.Name = "btnDeserializarXML";
             this.btnDeserializarXML.Size = new System.Drawing.Size(155, 23);
             this.btnDeserializarXML.TabIndex = 24;
@@ -283,7 +283,7 @@ namespace Formulario
             // lblId
             // 
             this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(241, 125);
+            this.lblId.Location = new System.Drawing.Point(12, 138);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(18, 15);
             this.lblId.TabIndex = 25;
@@ -291,7 +291,7 @@ namespace Formulario
             // 
             // btnSerializarJson
             // 
-            this.btnSerializarJson.Location = new System.Drawing.Point(471, 157);
+            this.btnSerializarJson.Location = new System.Drawing.Point(284, 166);
             this.btnSerializarJson.Name = "btnSerializarJson";
             this.btnSerializarJson.Size = new System.Drawing.Size(155, 23);
             this.btnSerializarJson.TabIndex = 26;
@@ -301,7 +301,7 @@ namespace Formulario
             // 
             // btnDeserializarJson
             // 
-            this.btnDeserializarJson.Location = new System.Drawing.Point(471, 186);
+            this.btnDeserializarJson.Location = new System.Drawing.Point(284, 195);
             this.btnDeserializarJson.Name = "btnDeserializarJson";
             this.btnDeserializarJson.Size = new System.Drawing.Size(155, 22);
             this.btnDeserializarJson.TabIndex = 27;
@@ -309,11 +309,29 @@ namespace Formulario
             this.btnDeserializarJson.UseVisualStyleBackColor = true;
             this.btnDeserializarJson.Click += new System.EventHandler(this.btnDeserializarJson_Click);
             // 
+            // lblIdCartuchera
+            // 
+            this.lblIdCartuchera.AutoSize = true;
+            this.lblIdCartuchera.Location = new System.Drawing.Point(12, 174);
+            this.lblIdCartuchera.Name = "lblIdCartuchera";
+            this.lblIdCartuchera.Size = new System.Drawing.Size(77, 15);
+            this.lblIdCartuchera.TabIndex = 28;
+            this.lblIdCartuchera.Text = "ID cartuchera";
+            // 
+            // txtBoxIdCartuchera
+            // 
+            this.txtBoxIdCartuchera.Location = new System.Drawing.Point(96, 167);
+            this.txtBoxIdCartuchera.Name = "txtBoxIdCartuchera";
+            this.txtBoxIdCartuchera.Size = new System.Drawing.Size(48, 23);
+            this.txtBoxIdCartuchera.TabIndex = 29;
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtBoxIdCartuchera);
+            this.Controls.Add(this.lblIdCartuchera);
             this.Controls.Add(this.btnDeserializarJson);
             this.Controls.Add(this.btnSerializarJson);
             this.Controls.Add(this.lblId);
@@ -322,7 +340,6 @@ namespace Formulario
             this.Controls.Add(this.txtBoxId);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnBorrar);
-            this.Controls.Add(this.lblCartuchera);
             this.Controls.Add(this.dgvCartuchera);
             this.Controls.Add(this.numericPrecio);
             this.Controls.Add(this.radioButtonSacapunta);
@@ -366,7 +383,6 @@ namespace Formulario
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Color;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tamanio;
-        private System.Windows.Forms.Label lblCartuchera;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.TextBox txtBoxId;
@@ -375,5 +391,8 @@ namespace Formulario
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Button btnSerializarJson;
         private System.Windows.Forms.Button btnDeserializarJson;
+        private System.Windows.Forms.Label lblIdCartuchera;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCartuchera;
+        private System.Windows.Forms.TextBox txtBoxIdCartuchera;
     }
 }

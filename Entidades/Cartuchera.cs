@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Cartuchera <T> where T : Utiles
+    public class Cartuchera<T> where T : Utiles
     {
         public delegate void CartucheraAction(object cartuchera);
         public event CartucheraAction EventoPrecio;
@@ -16,13 +16,14 @@ namespace Entidades
         private int id;
 
         public int Capacidad { get => capacidad; set => capacidad = value; }
-        public List<T> Utiles { get => utiles; }
+        public List<T> Utiles { get => utiles;}
         public int Id { get => id; }
-        public decimal PrecioTotal 
+        public decimal PrecioTotal
         {
-            get {
+            get
+            {
                 decimal precioTotal = 0;
-                foreach (T element in utiles) 
+                foreach (T element in utiles)
                 {
                     precioTotal += element.Precio;
                 }
@@ -31,10 +32,27 @@ namespace Entidades
             }
         }
 
-        public Cartuchera(int id, List<T> utiles, int capacidad)
+        public Cartuchera(int capacidad)
+        {
+            this.capacidad = capacidad;
+        }
+
+
+        public Cartuchera(int id, int capacidad): this (capacidad)
         {
             this.id = id;
+        }
+
+        public Cartuchera(List<T> utiles, int capacidad) : this(capacidad)
+        {
             this.utiles = utiles;
+            this.capacidad = capacidad;
+        }
+
+        public Cartuchera(int id, List<T> utiles, int capacidad) : this(id, capacidad)
+        {
+            this.utiles = utiles;
+            this.id = id;
             this.capacidad = capacidad;
         }
 
@@ -43,16 +61,16 @@ namespace Entidades
             return this.utiles.Count < this.capacidad;
         }
 
-        public static Cartuchera<T> operator +(Cartuchera<T> cartuchera, T util) 
+        public static Cartuchera<T> operator +(Cartuchera<T> cartuchera, T util)
         {
-            if (!cartuchera.hayCapacidad()) 
+            if (!cartuchera.hayCapacidad())
             {
                 throw new CartucheraLlenaException("No hay capacidad en la cartuchera");
             }
-           
+
             cartuchera.Utiles.Add(util);
 
-            if (cartuchera.PrecioTotal > 500 && cartuchera.EventoPrecio is not null)
+            if (cartuchera.PrecioTotal > 100 && cartuchera.EventoPrecio is not null)
             {
                 cartuchera.EventoPrecio.Invoke(cartuchera);
             }
@@ -63,7 +81,7 @@ namespace Entidades
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (T element in utiles) 
+            foreach (T element in utiles)
             {
                 sb.AppendLine(element.ToString());
             }
@@ -71,7 +89,7 @@ namespace Entidades
         }
 
 
-   
+
 
     }
 }

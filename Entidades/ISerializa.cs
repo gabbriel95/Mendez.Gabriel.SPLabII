@@ -12,7 +12,6 @@ namespace Entidades
 {
     public interface ISerializa
     {
-        private static string rutaBase;
         public static void Serializar_XmlTextWritter(string nombreArchivo, Lapiz lapiz)
         {
             using (XmlTextWriter xmlTextWriter = new XmlTextWriter($"{Lapiz.RutaBase}{nombreArchivo}", Encoding.UTF8))
