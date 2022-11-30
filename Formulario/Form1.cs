@@ -27,13 +27,10 @@ namespace Formulario
         {
             FrmAgregarUtil frmAgregarUtil = new FrmAgregarUtil();
             frmAgregarUtil.ShowDialog();
-            cartuchera.EventoPrecio += CrearArchivo;
+         
         }
 
-        public void CrearArchivo(object cartuchera) 
-        {
-            GestorDeArchivos.CrearArchivo("tickets.txt", cartuchera.ToString(), true);
-        }
+      
 
     }
 }

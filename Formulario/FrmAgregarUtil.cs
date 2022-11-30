@@ -76,7 +76,7 @@ namespace Formulario
                         lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                         cartuchera = cartuchera + lapiz;
                         LapizDao.InsertarUtil(lapiz);
-                        listaUtiles.Add(lapiz);
+                        listaUtiles?.Add(lapiz);
                         n = dgvCartuchera.Rows.Add();
                         dgvCartuchera.Rows[n].Cells[0].Value = LapizDao.GetIdMaximo();
                         dgvCartuchera.Rows[n].Cells[1].Value = lapiz.GetType();
@@ -92,7 +92,7 @@ namespace Formulario
                         goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                         cartuchera = cartuchera + goma;
                         LapizDao.InsertarUtil(goma);
-                        listaUtiles.Add(goma);
+                        listaUtiles?.Add(goma);
 
                         n = dgvCartuchera.Rows.Add();
                         dgvCartuchera.Rows[n].Cells[0].Value = goma.IdUtil;
@@ -110,7 +110,7 @@ namespace Formulario
                        
                         cartuchera = cartuchera + sacapunta;
                         LapizDao.InsertarUtil(sacapunta);
-                        listaUtiles.Add(sacapunta);
+                        listaUtiles?.Add(sacapunta);
 
                         n = dgvCartuchera.Rows.Add();
                         dgvCartuchera.Rows[n].Cells[0].Value = sacapunta.IdUtil;
@@ -124,6 +124,8 @@ namespace Formulario
 
                         break;
                 }
+                cartuchera.EventoPrecio += CrearArchivo;
+                cartuchera.Ejecutar();
             }
             catch (Exception ex) 
             {
@@ -141,7 +143,7 @@ namespace Formulario
         private void FrmAgregarUtil_Load(object sender, EventArgs e)
         {
             listaUtiles = LapizDao.LeerUtiles();
-
+          
 
             for (int i = 0; i < listaUtiles.Count; i++)
             {
@@ -270,6 +272,12 @@ namespace Formulario
             numericPrecio.Value = lapiz.Precio;
             cbxCaracteristica.Text = lapiz.Color.ToString();
             txtBoxId.Text = lapiz.IdUtil.ToString();
+        }
+
+        public void CrearArchivo(object cartuchera, EventArgs e)
+        {
+            GestorDeArchivos.CrearArchivo("tickets.txt", cartuchera.ToString(), true);
+            MessageBox.Show("Se creo un archivo");
         }
 
 

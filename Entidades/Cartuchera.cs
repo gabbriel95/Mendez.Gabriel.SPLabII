@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class Cartuchera<T> where T : Utiles
     {
-        public delegate void CartucheraAction(object cartuchera);
+        public delegate void CartucheraAction(object cartuchera, EventArgs e);
         public event CartucheraAction EventoPrecio;
 
         private List<T> utiles;
@@ -70,10 +70,10 @@ namespace Entidades
 
             cartuchera.Utiles.Add(util);
 
-            if (cartuchera.PrecioTotal > 100 && cartuchera.EventoPrecio is not null)
+            /*if (cartuchera.PrecioTotal > 100 && cartuchera.EventoPrecio is not null)
             {
-                cartuchera.EventoPrecio.Invoke(cartuchera);
-            }
+                
+            }*/
 
             return cartuchera;
         }
@@ -88,6 +88,14 @@ namespace Entidades
             return sb.ToString();
         }
 
+        public void Ejecutar() 
+        {
+            EventArgs eventArgs = new EventArgs();
+            if (EventoPrecio is not null) 
+            {
+                EventoPrecio.Invoke(this, eventArgs);
+            }
+        }
 
 
 
