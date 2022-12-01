@@ -326,7 +326,7 @@ namespace Formulario
             try
             {
                 lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                ISerializa.Serializar_XmlTextWritter("lapizXML", lapiz);
+                ISerializa<Lapiz, Fibron>.Serializar_XmlTextWritter("lapizXML", lapiz);
                 btnDeserializarXML.Enabled = true;
             }
             catch (Exception) 
@@ -340,7 +340,7 @@ namespace Formulario
         {
             try
             {
-                lapiz = IDeserializa.Deserializar_xmlTextReader("lapizXML");
+                lapiz = IDeserializa<Lapiz,Fibron>.Deserializar_xmlTextReader("lapizXML");
                 radioButtonLapiz.Checked = true;
                 textBoxMarca.Text = lapiz.Marca;
                 txtPrecio.Text = lapiz.Precio.ToString();
@@ -359,7 +359,7 @@ namespace Formulario
             try
             {
                 lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                ISerializa.Serializar_JSON("lapizJson", lapiz);
+                ISerializa<Lapiz, Fibron>.Serializar_JSON("lapizJson", lapiz);
                 btnDeserializarJson.Enabled = true;
             }
             catch (Exception) 
@@ -373,7 +373,7 @@ namespace Formulario
         {
             try
             {
-                lapiz = IDeserializa.DesSerializar_JSON("lapizJson");
+                lapiz = IDeserializa<Lapiz, Fibron>.DesSerializar_JSON("lapizJson");
                 radioButtonLapiz.Checked = true;
                 textBoxMarca.Text = lapiz.Marca;
                 txtPrecio.Text = lapiz.Precio.ToString();
