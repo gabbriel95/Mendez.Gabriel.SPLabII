@@ -78,7 +78,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Exception("Error al insertar el util", ex);
             }
             finally
             {
@@ -98,7 +98,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Exception("Error al insertar el util", ex);
             }
             finally
             {
@@ -119,7 +119,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Exception("Error al insertar el util", ex);
             }
             finally
             {
@@ -141,7 +141,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Exception("Error al eliminar el util", ex);
             }
             finally
             {
@@ -162,7 +162,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Exception("Error al editar el util", ex);
             }
             finally
             {

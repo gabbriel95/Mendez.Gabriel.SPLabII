@@ -15,6 +15,12 @@ namespace Formulario
     {
         List<Utiles> listaUtiles;
         Cartuchera<Utiles> cartuchera;
+        Cartuchera<Utiles>? cartucheraFibrones;
+        List<Utiles>? listaFibrones;
+
+        Fibron? fibron1;
+        Fibron? fibron2;
+        Fibron? fibron3;
 
         public Form1()
         {
@@ -30,7 +36,76 @@ namespace Formulario
          
         }
 
-      
+        private void btnLeerArchivo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxLeerArchivo.Text = GestorDeArchivos.LeerArchivo("tickets.txt");
+
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("No existe un archivo para cargar datos");
+            }
+         
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            fibron1 = new Fibron("Faber Cassel", 20, 10, Fibron.eColorFibron.Rojo);
+            fibron2 = new Fibron("Arti", 20, 4, Fibron.eColorFibron.Negro);
+            fibron3 = new Fibron("Fibron La salada", 2, 10, Fibron.eColorFibron.Verde);
+            listaFibrones = new List<Utiles>();
+
+            listaFibrones.Add(fibron1);
+            listaFibrones.Add(fibron2);
+            listaFibrones.Add(fibron3);
+
+            cartucheraFibrones = new Cartuchera<Utiles>(2, listaFibrones, 5);
+
+
+        }
+
+        private void brnResaltar_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            int cantidadR = random.Next(1,10);
+            int fibronR = random.Next(0,2);
+            Fibron fibronAux = new Fibron();
+
+
+            try
+            {
+                if (cartucheraFibrones?.Utiles[fibronR] is Fibron) 
+                {
+                    fibronAux = (Fibron)cartucheraFibrones.Utiles[fibronR];
+                    fibronAux.Resaltar(cantidadR);
+                    MessageBox.Show($"Usted uso {cantidadR} de tinta del fibron {fibronAux.Marca}, le queda {fibronAux.CantidadTinta}");
+
+                }
+            }
+            catch (SinTintaException ex) 
+            {
+                fibronAux.SinTintaEvento += CrearArchivoFibron;
+                fibronAux.ManejadorEventoSinTinta();
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void CrearArchivoFibron(object fibron, EventArgs e)
+        {
+            try
+            {
+               GestorDeArchivos.CrearArchivo("errors.log", fibron.ToString(), true);
+                MessageBox.Show("Se creo un archivo");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error inesperado al intentar crear el archivo .txt");
+            }
+
+        }
 
     }
 }

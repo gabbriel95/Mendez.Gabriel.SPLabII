@@ -20,16 +20,19 @@ namespace Entidades
         public static bool CrearArchivo(string nombreArchivo, string contenido, bool append)
         {
             StreamWriter stremWriter = null;
+            bool retorno = false;
 
             try
             {
                 string nuevaRuta = $"{GestorDeArchivos.rutaBase}\\{nombreArchivo}";
                 stremWriter = new StreamWriter(nuevaRuta, append);
                 stremWriter.WriteLine(contenido);
+                retorno = true;
             }
             catch (Exception ex)
             {
                 throw new ArchivoException("Error al crear archivo", ex);
+                
             }
             finally
             {
@@ -39,7 +42,7 @@ namespace Entidades
                 }
 
             }
-            return true;
+            return retorno;
         }
 
         public static string LeerArchivo(string nombreArchivo)

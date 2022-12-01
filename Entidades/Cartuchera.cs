@@ -58,7 +58,7 @@ namespace Entidades
 
         public bool hayCapacidad()
         {
-            return this.utiles.Count < this.capacidad;
+            return this.utiles.Count <= this.capacidad;
         }
 
         public static Cartuchera<T> operator +(Cartuchera<T> cartuchera, T util)
@@ -70,10 +70,6 @@ namespace Entidades
 
             cartuchera.Utiles.Add(util);
 
-            /*if (cartuchera.PrecioTotal > 100 && cartuchera.EventoPrecio is not null)
-            {
-                
-            }*/
 
             return cartuchera;
         }

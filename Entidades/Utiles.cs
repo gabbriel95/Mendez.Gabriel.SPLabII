@@ -39,7 +39,7 @@ namespace Entidades
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"ID: {this.idUtil}");
+            sb.AppendLine($"ID: {this.idUtil}");
             sb.AppendLine($"Marca: {this.marca}");
             sb.AppendLine($"Precio: {this.precio}");
 

@@ -30,6 +30,7 @@ namespace Formulario
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBoxMarca = new System.Windows.Forms.TextBox();
             this.lblUtil = new System.Windows.Forms.Label();
             this.lblMarca = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@ namespace Formulario
             this.radioButtonLapiz = new System.Windows.Forms.RadioButton();
             this.radioButtonGoma = new System.Windows.Forms.RadioButton();
             this.radioButtonSacapunta = new System.Windows.Forms.RadioButton();
-            this.numericPrecio = new System.Windows.Forms.NumericUpDown();
             this.dgvCartuchera = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Util = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +60,10 @@ namespace Formulario
             this.btnDeserializarJson = new System.Windows.Forms.Button();
             this.lblIdCartuchera = new System.Windows.Forms.Label();
             this.txtBoxIdCartuchera = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lblErrorFloat = new System.Windows.Forms.Label();
+            this.lblErrorIdCartuchera = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,13 +164,6 @@ namespace Formulario
             this.radioButtonSacapunta.Text = "Sacapunta";
             this.radioButtonSacapunta.UseVisualStyleBackColor = true;
             this.radioButtonSacapunta.CheckedChanged += new System.EventHandler(this.radioButtonSacapunta_CheckedChanged);
-            // 
-            // numericPrecio
-            // 
-            this.numericPrecio.Location = new System.Drawing.Point(67, 101);
-            this.numericPrecio.Name = "numericPrecio";
-            this.numericPrecio.Size = new System.Drawing.Size(120, 23);
-            this.numericPrecio.TabIndex = 15;
             // 
             // dgvCartuchera
             // 
@@ -324,12 +320,51 @@ namespace Formulario
             this.txtBoxIdCartuchera.Name = "txtBoxIdCartuchera";
             this.txtBoxIdCartuchera.Size = new System.Drawing.Size(48, 23);
             this.txtBoxIdCartuchera.TabIndex = 29;
+            this.txtBoxIdCartuchera.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxIdCartuchera_KeyPress);
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Location = new System.Drawing.Point(55, 101);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(100, 23);
+            this.txtPrecio.TabIndex = 31;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // lblErrorFloat
+            // 
+            this.lblErrorFloat.AutoSize = true;
+            this.lblErrorFloat.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorFloat.Location = new System.Drawing.Point(167, 106);
+            this.lblErrorFloat.Name = "lblErrorFloat";
+            this.lblErrorFloat.Size = new System.Drawing.Size(80, 15);
+            this.lblErrorFloat.TabIndex = 33;
+            this.lblErrorFloat.Text = "Solo numeros";
+            this.lblErrorFloat.Visible = false;
+            // 
+            // lblErrorIdCartuchera
+            // 
+            this.lblErrorIdCartuchera.AutoSize = true;
+            this.lblErrorIdCartuchera.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorIdCartuchera.Location = new System.Drawing.Point(150, 174);
+            this.lblErrorIdCartuchera.Name = "lblErrorIdCartuchera";
+            this.lblErrorIdCartuchera.Size = new System.Drawing.Size(80, 15);
+            this.lblErrorIdCartuchera.TabIndex = 34;
+            this.lblErrorIdCartuchera.Text = "Solo numeros";
+            this.lblErrorIdCartuchera.Visible = false;
             // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblErrorIdCartuchera);
+            this.Controls.Add(this.lblErrorFloat);
+            this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.txtBoxIdCartuchera);
             this.Controls.Add(this.lblIdCartuchera);
             this.Controls.Add(this.btnDeserializarJson);
@@ -341,7 +376,6 @@ namespace Formulario
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.dgvCartuchera);
-            this.Controls.Add(this.numericPrecio);
             this.Controls.Add(this.radioButtonSacapunta);
             this.Controls.Add(this.radioButtonGoma);
             this.Controls.Add(this.radioButtonLapiz);
@@ -355,7 +389,6 @@ namespace Formulario
             this.Name = "FrmAgregarUtil";
             this.Text = "FrmAgregarUtil";
             this.Load += new System.EventHandler(this.FrmAgregarUtil_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -374,7 +407,6 @@ namespace Formulario
         private System.Windows.Forms.RadioButton radioButtonLapiz;
         private System.Windows.Forms.RadioButton radioButtonGoma;
         private System.Windows.Forms.RadioButton radioButtonSacapunta;
-        private System.Windows.Forms.NumericUpDown numericPrecio;
         private System.Windows.Forms.DataGridView dgvCartuchera;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Util;
@@ -394,5 +426,9 @@ namespace Formulario
         private System.Windows.Forms.Label lblIdCartuchera;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCartuchera;
         private System.Windows.Forms.TextBox txtBoxIdCartuchera;
+        private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label lblErrorFloat;
+        private System.Windows.Forms.Label lblErrorIdCartuchera;
     }
 }

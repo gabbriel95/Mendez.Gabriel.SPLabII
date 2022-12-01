@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class CartucheraLlenaException : Exception
     {
-        public CartucheraLlenaException() : base("Lanzaste mi excepcion por defecto") { }
+        public CartucheraLlenaException() : base("La cartuchera esta llena") { }
         public CartucheraLlenaException(string message) : base(message) { }
     }
 }

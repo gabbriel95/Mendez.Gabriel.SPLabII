@@ -73,7 +73,7 @@ namespace Formulario
                 switch (eleccion)
                 {
                     case 1:
-                        lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+                        lapiz = new Lapiz(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                         cartuchera = cartuchera + lapiz;
                         LapizDao.InsertarUtil(lapiz);
                         listaUtiles?.Add(lapiz);
@@ -81,7 +81,7 @@ namespace Formulario
                         dgvCartuchera.Rows[n].Cells[0].Value = LapizDao.GetIdMaximo();
                         dgvCartuchera.Rows[n].Cells[1].Value = lapiz.GetType();
                         dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
-                        dgvCartuchera.Rows[n].Cells[3].Value = numericPrecio.Value;
+                        dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
                         dgvCartuchera.Rows[n].Cells[4].Value = null;
                         dgvCartuchera.Rows[n].Cells[5].Value = cbxCaracteristica.Text;
                         dgvCartuchera.Rows[n].Cells[6].Value = null;
@@ -89,7 +89,7 @@ namespace Formulario
                
                         break;
                     case 2:
-                        goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+                        goma = new Goma(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                         cartuchera = cartuchera + goma;
                         LapizDao.InsertarUtil(goma);
                         listaUtiles?.Add(goma);
@@ -98,7 +98,7 @@ namespace Formulario
                         dgvCartuchera.Rows[n].Cells[0].Value = goma.IdUtil;
                         dgvCartuchera.Rows[n].Cells[1].Value = goma.GetType();
                         dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
-                        dgvCartuchera.Rows[n].Cells[3].Value = numericPrecio.Value;
+                        dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
                         dgvCartuchera.Rows[n].Cells[4].Value = null;
                         dgvCartuchera.Rows[n].Cells[5].Value = null;
                         dgvCartuchera.Rows[n].Cells[6].Value = cbxCaracteristica.Text;
@@ -106,7 +106,7 @@ namespace Formulario
 
                         break;
                     case 3:
-                        sacapunta = new Sacapunta(textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+                        sacapunta = new Sacapunta(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                        
                         cartuchera = cartuchera + sacapunta;
                         LapizDao.InsertarUtil(sacapunta);
@@ -116,7 +116,7 @@ namespace Formulario
                         dgvCartuchera.Rows[n].Cells[0].Value = sacapunta.IdUtil;
                         dgvCartuchera.Rows[n].Cells[1].Value = sacapunta.GetType();
                         dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
-                        dgvCartuchera.Rows[n].Cells[3].Value = numericPrecio.Value;
+                        dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
                         dgvCartuchera.Rows[n].Cells[4].Value = cbxCaracteristica.Text;
                         dgvCartuchera.Rows[n].Cells[5].Value = null;
                         dgvCartuchera.Rows[n].Cells[6].Value = null;
@@ -124,8 +124,12 @@ namespace Formulario
 
                         break;
                 }
-                cartuchera.EventoPrecio += CrearArchivo;
-                cartuchera.Ejecutar();
+                if(cartuchera.PrecioTotal > 500) 
+                {
+                    cartuchera.EventoPrecio += CrearArchivo;
+                    cartuchera.Ejecutar();
+                }
+        
             }
             catch (Exception ex) 
             {
@@ -136,44 +140,57 @@ namespace Formulario
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            LapizDao.EliminarUtil((int)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[0].Value);
-            dgvCartuchera.Rows.RemoveAt(indiceFilaDataGridView);
+            try
+            {
+                LapizDao.EliminarUtil((int)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[0].Value);
+                dgvCartuchera.Rows.RemoveAt(indiceFilaDataGridView);
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+      
         }
 
         private void FrmAgregarUtil_Load(object sender, EventArgs e)
         {
-            listaUtiles = LapizDao.LeerUtiles();
-          
-
-            for (int i = 0; i < listaUtiles.Count; i++)
+        
+            try
             {
-                int n = dgvCartuchera.Rows.Add();
-                dgvCartuchera.Rows[n].Cells[0].Value = listaUtiles[i].IdUtil;
-                dgvCartuchera.Rows[n].Cells[1].Value = listaUtiles[i].GetType();
-                dgvCartuchera.Rows[n].Cells[2].Value = listaUtiles[i].Marca;
-                dgvCartuchera.Rows[n].Cells[3].Value = listaUtiles[i].Precio;
-                dgvCartuchera.Rows[n].Cells[7].Value = listaUtiles[i].IdCartuchera;
-                cartuchera.Utiles.Add(listaUtiles[i]);
+                listaUtiles = LapizDao.LeerUtiles();
 
-                if (listaUtiles[i].GetType() == typeof(Sacapunta))
+
+                for (int i = 0; i < listaUtiles.Count; i++)
                 {
-                    Sacapunta sacapunta = (Sacapunta)listaUtiles[i];
-                    this.CargarDataGrid(n, 4, sacapunta.Tipo.ToString());
-                }
-                if (listaUtiles[i].GetType() == typeof(Lapiz))
-                {
-                    Lapiz lapiz = (Lapiz)listaUtiles[i];
-                    this.CargarDataGrid(n, 5, lapiz.Color.ToString());
-                }
-                if (listaUtiles[i].GetType() == typeof(Goma))
-                {
-                    Goma goma = (Goma)listaUtiles[i];
-                    this.CargarDataGrid(n, 6, goma.Tamanio.ToString());
+                    int n = dgvCartuchera.Rows.Add();
+                    dgvCartuchera.Rows[n].Cells[0].Value = listaUtiles[i].IdUtil;
+                    dgvCartuchera.Rows[n].Cells[1].Value = listaUtiles[i].GetType();
+                    dgvCartuchera.Rows[n].Cells[2].Value = listaUtiles[i].Marca;
+                    dgvCartuchera.Rows[n].Cells[3].Value = listaUtiles[i].Precio;
+                    dgvCartuchera.Rows[n].Cells[7].Value = listaUtiles[i].IdCartuchera;
+                    cartuchera.Utiles.Add(listaUtiles[i]);
+
+                    if (listaUtiles[i].GetType() == typeof(Sacapunta))
+                    {
+                        Sacapunta sacapunta = (Sacapunta)listaUtiles[i];
+                        this.CargarDataGrid(n, 4, sacapunta.Tipo.ToString());
+                    }
+                    if (listaUtiles[i].GetType() == typeof(Lapiz))
+                    {
+                        Lapiz lapiz = (Lapiz)listaUtiles[i];
+                        this.CargarDataGrid(n, 5, lapiz.Color.ToString());
+                    }
+                    if (listaUtiles[i].GetType() == typeof(Goma))
+                    {
+                        Goma goma = (Goma)listaUtiles[i];
+                        this.CargarDataGrid(n, 6, goma.Tamanio.ToString());
+                    }
                 }
             }
-
-            MessageBox.Show(cartuchera.ToString());
-            //MessageBox.Show(listaUtiles[0].ToString());
+            catch (Exception) 
+            {
+                MessageBox.Show("Error, al intentar cargar utiles desde la base de datos");
+            }
 
         }
 
@@ -183,6 +200,11 @@ namespace Formulario
 
         }
 
+        /// <summary>
+        /// Vuelve a insertar los datos de un util del DataGridView en los diferentes campos del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvCartuchera_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             indiceFilaDataGridView = e.RowIndex;
@@ -210,74 +232,147 @@ namespace Formulario
             }
 
             textBoxMarca.Text = (string)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[2].Value;
-            numericPrecio.Value = (decimal)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[3].Value;
+            txtPrecio.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[3].Value.ToString();
             txtBoxIdCartuchera.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[7].Value.ToString();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (radioButtonLapiz.Checked)
+            try
             {
-                lapiz = new Lapiz(textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+                if (radioButtonLapiz.Checked)
+                {
+                    lapiz = new Lapiz(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
 
-                LapizDao.ModificarUtil(lapiz, int.Parse(txtBoxId.Text));
+                    LapizDao.ModificarUtil(lapiz, int.Parse(txtBoxId.Text));
+                }
+
+                if (radioButtonGoma.Checked)
+                {
+                    goma = new Goma(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+                    LapizDao.ModificarUtil(goma, int.Parse(txtBoxId.Text));
+                }
+
+                if (radioButtonSacapunta.Checked)
+                {
+                    sacapunta = new Sacapunta(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+                    LapizDao.ModificarUtil(sacapunta, int.Parse(txtBoxId.Text));
+                }
             }
-
-            if (radioButtonGoma.Checked)
+            catch (Exception ex) 
             {
-                goma = new Goma(textBoxMarca.Text, numericPrecio.Value, (eTamanio)Enum.Parse(typeof(eTamanio), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
-                LapizDao.ModificarUtil(goma, int.Parse(txtBoxId.Text));
+                MessageBox.Show(ex.Message);
             }
-
-            if (radioButtonSacapunta.Checked)
-            {
-                sacapunta = new Sacapunta(textBoxMarca.Text, numericPrecio.Value, (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
-                LapizDao.ModificarUtil(sacapunta, int.Parse(txtBoxId.Text));
-            }
+           
 
 
         }
 
         private void btnSerializarXML_Click(object sender, EventArgs e)
         {
-
-            lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-            ISerializa.Serializar_XmlTextWritter("lapizXML", lapiz);
-            btnDeserializarXML.Enabled = true;
+            try
+            {
+                lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                ISerializa.Serializar_XmlTextWritter("lapizXML", lapiz);
+                btnDeserializarXML.Enabled = true;
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("El objecto a serializar debe ser un LAPIZ");
+            }
+      
         }
 
         private void btnDeserializarXML_Click(object sender, EventArgs e)
         {
-            lapiz = IDeserializa.Deserializar_xmlTextReader("lapizXML");
-            radioButtonLapiz.Checked = true;
-            textBoxMarca.Text = lapiz.Marca;
-            numericPrecio.Value = lapiz.Precio;
-            cbxCaracteristica.Text = lapiz.Color.ToString();
-            txtBoxId.Text = lapiz.IdUtil.ToString();
+            try
+            {
+                lapiz = IDeserializa.Deserializar_xmlTextReader("lapizXML");
+                radioButtonLapiz.Checked = true;
+                textBoxMarca.Text = lapiz.Marca;
+                txtPrecio.Text = lapiz.Precio.ToString();
+                cbxCaracteristica.Text = lapiz.Color.ToString();
+                txtBoxId.Text = lapiz.IdUtil.ToString();
+            }
+            catch 
+            {
+                MessageBox.Show("No se encontro un archivo para deserializar");
+            }
 
         }
 
         private void btnSerializarJson_Click(object sender, EventArgs e)
         {
-            lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, numericPrecio.Value, (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-            ISerializa.Serializar_JSON("lapizJson", lapiz);
-            btnDeserializarJson.Enabled = true;
+            try
+            {
+                lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                ISerializa.Serializar_JSON("lapizJson", lapiz);
+                btnDeserializarJson.Enabled = true;
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("El objecto a serializar debe ser un LAPIZ");
+            }
+         
         }
 
         private void btnDeserializarJson_Click(object sender, EventArgs e)
         {
-            lapiz = IDeserializa.DesSerializar_JSON("lapizJson");
-            radioButtonLapiz.Checked = true;
-            textBoxMarca.Text = lapiz.Marca;
-            numericPrecio.Value = lapiz.Precio;
-            cbxCaracteristica.Text = lapiz.Color.ToString();
-            txtBoxId.Text = lapiz.IdUtil.ToString();
+            try
+            {
+                lapiz = IDeserializa.DesSerializar_JSON("lapizJson");
+                radioButtonLapiz.Checked = true;
+                textBoxMarca.Text = lapiz.Marca;
+                txtPrecio.Text = lapiz.Precio.ToString();
+                cbxCaracteristica.Text = lapiz.Color.ToString();
+                txtBoxId.Text = lapiz.IdUtil.ToString();
+
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("No se encontro un archivo para deserializar");
+            }
+         
         }
 
         public void CrearArchivo(object cartuchera, EventArgs e)
         {
-            GestorDeArchivos.CrearArchivo("tickets.txt", cartuchera.ToString(), true);
-            MessageBox.Show("Se creo un archivo");
+            try 
+            {
+                GestorDeArchivos.CrearArchivo("tickets.txt", cartuchera.ToString(), true);
+                MessageBox.Show("Se creo un archivo");
+            }
+            catch(Exception) 
+            {
+                MessageBox.Show("Error inesperado al intentar crear el archivo .txt");
+            }
+           
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                lblErrorFloat.Visible = true;
+                e.Handled = true;
+            }
+            else
+            {
+                lblErrorFloat.Visible = false;
+            }
+        }
+        //Preguntar como se podria simplificar este codigo repetido
+        private void txtBoxIdCartuchera_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                lblErrorIdCartuchera.Visible = true;
+                e.Handled = true;
+            }
+            else
+            {
+                lblErrorIdCartuchera.Visible = false;
+            }
         }
 
 
