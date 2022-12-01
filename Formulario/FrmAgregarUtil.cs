@@ -147,7 +147,7 @@ namespace Formulario
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error, al intentar eliminar util");
             }
       
         }
