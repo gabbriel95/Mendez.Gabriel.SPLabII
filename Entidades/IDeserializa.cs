@@ -10,26 +10,26 @@ using System.Text.Json;
 
 namespace Entidades
 {
-    public interface IDeserializa
+    public interface IDeserializa <T, U> where T : Lapiz where U : Fibron
     {
 
-        public static Lapiz Deserializar_xmlTextReader(string nombreArchivo)
+        public static T Deserializar_xmlTextReader(string nombreArchivo)
         {
             using (XmlTextReader xmlTextReader = new XmlTextReader($"{Lapiz.RutaBase}{nombreArchivo}"))
             {
-                XmlSerializer xml = new XmlSerializer(typeof(Lapiz));
-                Lapiz lapiz = xml.Deserialize(xmlTextReader) as Lapiz;
+                XmlSerializer xml = new XmlSerializer(typeof(T));
+                T util = xml.Deserialize(xmlTextReader) as T;
 
-                return lapiz;
+                return util;
             }
         }
 
-        public static Lapiz DesSerializar_JSON(string nombreArchivo)
+        public static T DesSerializar_JSON(string nombreArchivo)
         {
             using (StreamReader streamReader = new StreamReader($"{Lapiz.RutaBase}{nombreArchivo}"))
             {
                 string json = streamReader.ReadToEnd();
-                return JsonSerializer.Deserialize<Lapiz>(json);
+                return JsonSerializer.Deserialize<T>(json);
             }
         }
     }

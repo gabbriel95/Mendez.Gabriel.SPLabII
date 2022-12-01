@@ -64,6 +64,10 @@ namespace Formulario
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lblErrorFloat = new System.Windows.Forms.Label();
             this.lblErrorIdCartuchera = new System.Windows.Forms.Label();
+            this.cantidadTinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblTinta = new System.Windows.Forms.Label();
+            this.txtCantidadTinta = new System.Windows.Forms.TextBox();
+            this.radioButtonFibron = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
             // 
@@ -176,7 +180,8 @@ namespace Formulario
             this.Tipo,
             this.Color,
             this.Tamanio,
-            this.idCartuchera});
+            this.idCartuchera,
+            this.cantidadTinta});
             this.dgvCartuchera.Location = new System.Drawing.Point(0, 223);
             this.dgvCartuchera.Name = "dgvCartuchera";
             this.dgvCartuchera.RowTemplate.Height = 25;
@@ -357,11 +362,47 @@ namespace Formulario
             this.lblErrorIdCartuchera.Text = "Solo numeros";
             this.lblErrorIdCartuchera.Visible = false;
             // 
+            // cantidadTinta
+            // 
+            this.cantidadTinta.HeaderText = "Cantidad tinta";
+            this.cantidadTinta.Name = "cantidadTinta";
+            // 
+            // lblTinta
+            // 
+            this.lblTinta.AutoSize = true;
+            this.lblTinta.Location = new System.Drawing.Point(11, 202);
+            this.lblTinta.Name = "lblTinta";
+            this.lblTinta.Size = new System.Drawing.Size(96, 15);
+            this.lblTinta.TabIndex = 35;
+            this.lblTinta.Text = "cantidad de tinta";
+            // 
+            // txtCantidadTinta
+            // 
+            this.txtCantidadTinta.Location = new System.Drawing.Point(130, 196);
+            this.txtCantidadTinta.Name = "txtCantidadTinta";
+            this.txtCantidadTinta.Size = new System.Drawing.Size(69, 23);
+            this.txtCantidadTinta.TabIndex = 36;
+            // 
+            // radioButtonFibron
+            // 
+            this.radioButtonFibron.AutoSize = true;
+            this.radioButtonFibron.Location = new System.Drawing.Point(469, 7);
+            this.radioButtonFibron.Name = "radioButtonFibron";
+            this.radioButtonFibron.Size = new System.Drawing.Size(59, 19);
+            this.radioButtonFibron.TabIndex = 37;
+            this.radioButtonFibron.TabStop = true;
+            this.radioButtonFibron.Text = "Fibron";
+            this.radioButtonFibron.UseVisualStyleBackColor = true;
+            this.radioButtonFibron.CheckedChanged += new System.EventHandler(this.radioButtonFibron_CheckedChanged);
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.radioButtonFibron);
+            this.Controls.Add(this.txtCantidadTinta);
+            this.Controls.Add(this.lblTinta);
             this.Controls.Add(this.lblErrorIdCartuchera);
             this.Controls.Add(this.lblErrorFloat);
             this.Controls.Add(this.txtPrecio);
@@ -430,5 +471,9 @@ namespace Formulario
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label lblErrorFloat;
         private System.Windows.Forms.Label lblErrorIdCartuchera;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadTinta;
+        private System.Windows.Forms.Label lblTinta;
+        private System.Windows.Forms.TextBox txtCantidadTinta;
+        private System.Windows.Forms.RadioButton radioButtonFibron;
     }
 }

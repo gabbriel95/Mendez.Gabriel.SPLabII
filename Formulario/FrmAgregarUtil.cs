@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using static Entidades.Fibron;
 using static Entidades.Goma;
 using static Entidades.Lapiz;
 using static Entidades.Sacapunta;
@@ -18,6 +19,7 @@ namespace Formulario
     {
         Lapiz? lapiz;
         Goma? goma;
+        Fibron? fibron;
         Sacapunta? sacapunta;
         List<Utiles>? listaUtiles;
         Cartuchera<Utiles> cartuchera;
@@ -61,6 +63,18 @@ namespace Formulario
             this.cbxCaracteristica.Items.AddRange(new object[] {
             Entidades.Sacapunta.eTipo.metal,
             Entidades.Sacapunta.eTipo.plastico,});
+            eleccion = 3;
+        }
+
+        private void radioButtonFibron_CheckedChanged(object sender, EventArgs e)
+        {
+            this.cbxCaracteristica.Enabled = true;
+            this.cbxCaracteristica.Items.Clear();
+            this.cbxCaracteristica.Items.AddRange(new object[] {
+            Entidades.Fibron.eColorFibron.Rojo,
+            Entidades.Fibron.eColorFibron.Negro,
+            Entidades.Fibron.eColorFibron.Azul,
+            Entidades.Fibron.eColorFibron.Verde});
             eleccion = 3;
         }
 
@@ -123,7 +137,27 @@ namespace Formulario
                         dgvCartuchera.Rows[n].Cells[7].Value = txtBoxIdCartuchera.Text;
 
                         break;
-                }
+                    case 4:
+                        fibron = new Fibron(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
+
+
+                        cartuchera = cartuchera + fibron;
+                        LapizDao.InsertarUtil(fibron);
+                        listaUtiles?.Add(fibron);
+
+
+                        n = dgvCartuchera.Rows.Add();
+                        dgvCartuchera.Rows[n].Cells[0].Value = fibron.IdUtil;
+                        dgvCartuchera.Rows[n].Cells[1].Value = fibron.GetType();
+                        dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
+                        dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
+                        dgvCartuchera.Rows[n].Cells[4].Value = cbxCaracteristica.Text;
+                        dgvCartuchera.Rows[n].Cells[5].Value = null;
+                        dgvCartuchera.Rows[n].Cells[6].Value = null;
+                        dgvCartuchera.Rows[n].Cells[7].Value = txtBoxIdCartuchera.Text;
+                        dgvCartuchera.Rows[n].Cells[8].Value = txtCantidadTinta.Text;
+                        break;
+                }   
                 if(cartuchera.PrecioTotal > 500) 
                 {
                     cartuchera.EventoPrecio += CrearArchivo;
@@ -145,7 +179,7 @@ namespace Formulario
                 LapizDao.EliminarUtil((int)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[0].Value);
                 dgvCartuchera.Rows.RemoveAt(indiceFilaDataGridView);
             }
-            catch (Exception ex) 
+            catch (Exception) 
             {
                 MessageBox.Show("Error, al intentar eliminar util");
             }
@@ -168,6 +202,7 @@ namespace Formulario
                     dgvCartuchera.Rows[n].Cells[2].Value = listaUtiles[i].Marca;
                     dgvCartuchera.Rows[n].Cells[3].Value = listaUtiles[i].Precio;
                     dgvCartuchera.Rows[n].Cells[7].Value = listaUtiles[i].IdCartuchera;
+                  
                     cartuchera.Utiles.Add(listaUtiles[i]);
 
                     if (listaUtiles[i].GetType() == typeof(Sacapunta))
@@ -184,6 +219,12 @@ namespace Formulario
                     {
                         Goma goma = (Goma)listaUtiles[i];
                         this.CargarDataGrid(n, 6, goma.Tamanio.ToString());
+                    }
+                    if (listaUtiles[i].GetType() == typeof(Goma))
+                    {
+                        Fibron fibra = (Fibron)listaUtiles[i];
+                        this.CargarDataGrid(n, 5, fibra.Color.ToString());
+                        dgvCartuchera.Rows[n].Cells[8].Value = fibra.CantidadTinta;
                     }
                 }
             }
@@ -229,11 +270,18 @@ namespace Formulario
                     cbxCaracteristica.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[4].Value.ToString();
 
                 }
+                if (dgvCartuchera.Rows[indiceFilaDataGridView].Cells[1].Value.ToString() == typeof(Fibron).ToString()) 
+                {
+                    radioButtonFibron.Checked = true;
+                    cbxCaracteristica.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[5].Value.ToString();
+                    txtCantidadTinta.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[8].Value.ToString();
+                }
             }
 
             textBoxMarca.Text = (string)dgvCartuchera.Rows[indiceFilaDataGridView].Cells[2].Value;
             txtPrecio.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[3].Value.ToString();
             txtBoxIdCartuchera.Text = dgvCartuchera.Rows[indiceFilaDataGridView].Cells[7].Value.ToString();
+           
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -257,6 +305,11 @@ namespace Formulario
                 {
                     sacapunta = new Sacapunta(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eTipo)Enum.Parse(typeof(eTipo), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                     LapizDao.ModificarUtil(sacapunta, int.Parse(txtBoxId.Text));
+                }
+                if (radioButtonFibron.Checked) 
+                {
+                    fibron = new Fibron(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text));
+                    LapizDao.ModificarUtil(fibron, int.Parse(txtBoxId.Text));
                 }
             }
             catch (Exception ex) 
@@ -375,7 +428,7 @@ namespace Formulario
             }
         }
 
-
+      
     }
 }
 

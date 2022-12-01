@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Fibron : Utiles
+    public class Fibron : Utiles, IDeserializa<Lapiz, Fibron>, ISerializa<Lapiz,Fibron>
     {
         public delegate void CartucheraAction(object fibron, EventArgs e);
         public event CartucheraAction SinTintaEvento;
@@ -29,11 +29,25 @@ namespace Entidades
 
         public Fibron() { }
 
-        public Fibron(string marca, decimal precio, int cantidadTinda, eColorFibron color) : base(marca,precio, 2)
+        public Fibron(string marca, decimal precio, int cantidadTinda, eColorFibron color) : base(marca, precio, 2)
         {
-            this.cantidadTinta=cantidadTinda;
-            this.color=color;
+            this.cantidadTinta = cantidadTinda;
+            this.color = color;
         }
+
+        public Fibron(string marca, decimal precio, int cantidadTinda, eColorFibron color, int idCartuchera) : base(marca, precio, idCartuchera)
+        {
+            this.cantidadTinta = cantidadTinda;
+            this.color = color;
+        }
+
+        public Fibron(int id, string marca, decimal precio, int cantidadTinda, eColorFibron color, int idCartuchera) : base(id, marca, precio, 2)
+        {
+            this.cantidadTinta = cantidadTinda;
+            this.color = color;
+        }
+
+       
 
         public void Resaltar(int cantidad) 
         {

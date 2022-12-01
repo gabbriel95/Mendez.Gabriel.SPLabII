@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using static Entidades.Lapiz;
 using static Entidades.Goma;
 using static Entidades.Sacapunta;
+using static Entidades.Fibron;
 
 namespace Entidades
 {
@@ -32,7 +33,7 @@ namespace Entidades
             try
             {
                 conexion.Open();
-                comando.CommandText = "SELECT * FROM UTILESS";
+                comando.CommandText = "SELECT * FROM NUEVATABLAUTILES";
                 reader = comando.ExecuteReader();
 
                 while (reader.Read())
@@ -48,6 +49,10 @@ namespace Entidades
                     else if (reader["util"].ToString() == "Entidades.Sacapunta")
                     {
                         listaUtiles.Add(new Sacapunta((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (eTipo)Enum.Parse(typeof(eTipo), (string)reader["tipo"]), (int)reader["id_cartuchera"]));
+                    }
+                    else if (reader["util"].ToString() == "Entidades.Fibron")
+                    {
+                        listaUtiles.Add(new Fibron((int)reader["id"], reader["marca"].ToString(), (decimal)reader["precio"], (int)reader["cantidad_tinta"], (eColorFibron)Enum.Parse(typeof(eColorFibron), (string)reader["color"]), (int)reader["id_cartuchera"]));
                     }
                 }
 
@@ -70,7 +75,28 @@ namespace Entidades
             try
             {
                 conexion.Open();
-                comando.CommandText = $"INSERT INTO UTILESS VALUES ('{lapiz.GetType()}', '{lapiz.Marca}', {lapiz.Precio}, NULL, '{lapiz.Color}',NULL, {lapiz.IdCartuchera})";
+                comando.CommandText = $"INSERT INTO NUEVATABLAUTILES VALUES ('{lapiz.GetType()}', '{lapiz.Marca}', {lapiz.Precio}, NULL, '{lapiz.Color}',NULL, {lapiz.IdCartuchera}, NULL )";
+
+
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el util", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public static void InsertarUtil(Fibron fibron)
+        {
+            try
+            {
+                conexion.Open();
+                comando.CommandText = $"INSERT INTO NUEVATABLAUTILES VALUES ('{fibron.GetType()}', '{fibron.Marca}', {fibron.Precio}, NULL, '{fibron.Color}',NULL, {fibron.IdCartuchera}, {fibron.CantidadTinta} )";
 
 
                 comando.ExecuteNonQuery();
@@ -90,7 +116,7 @@ namespace Entidades
             try
             {
                 conexion.Open();
-                comando.CommandText = $"INSERT INTO UTILESS VALUES ('{goma.GetType()}', '{goma.Marca}', {goma.Precio}, NULL, NULL,'{goma.Tamanio}', {goma.IdCartuchera})";
+                comando.CommandText = $"INSERT INTO NUEVATABLAUTILES VALUES ('{goma.GetType()}', '{goma.Marca}', {goma.Precio}, NULL, NULL,'{goma.Tamanio}', {goma.IdCartuchera}, NULL)";
 
 
                 comando.ExecuteNonQuery();
@@ -111,7 +137,7 @@ namespace Entidades
             try
             {
                 conexion.Open();
-                comando.CommandText = $"INSERT INTO UTILESS VALUES ('{sacapunta.GetType()}', '{sacapunta.Marca}', {sacapunta.Precio}, '{sacapunta.Tipo}', NULL,NULL, {sacapunta.IdCartuchera})";
+                comando.CommandText = $"INSERT INTO NUEVATABLAUTILES VALUES ('{sacapunta.GetType()}', '{sacapunta.Marca}', {sacapunta.Precio}, '{sacapunta.Tipo}', NULL,NULL, {sacapunta.IdCartuchera}, NULL)";
 
 
                 comando.ExecuteNonQuery();
@@ -134,7 +160,7 @@ namespace Entidades
             try
             {
                 conexion.Open();
-                comando.CommandText = $"DELETE FROM UTILESS WHERE id = {id}";
+                comando.CommandText = $"DELETE FROM NUEVATABLAUTILES WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
 
@@ -155,7 +181,7 @@ namespace Entidades
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera} WHERE id = {id}";
+                comando.CommandText = $"UPDATE NUEVATABLAUTILES SET util='{lapiz.GetType()}', marca = '{lapiz.Marca}', precio = {lapiz.Precio},tipo = null, color = '{lapiz.Color}', tamanio = null, id_cartuchera = {lapiz.IdCartuchera}, cantidad_tinta = null WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
 
@@ -176,7 +202,7 @@ namespace Entidades
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{goma.GetType()}', marca = '{goma.Marca}', precio = {goma.Precio},tipo = null, color = null, tamanio = '{goma.Tamanio}', id_cartuchera = {goma.IdCartuchera} WHERE id = {id}";
+                comando.CommandText = $"UPDATE NUEVATABLAUTILES SET util='{goma.GetType()}', marca = '{goma.Marca}', precio = {goma.Precio},tipo = null, color = null, tamanio = '{goma.Tamanio}', id_cartuchera = {goma.IdCartuchera}, cantidad_tinta = null WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
 
@@ -197,7 +223,7 @@ namespace Entidades
             {
                 comando.Parameters.Clear();
                 conexion.Open();
-                comando.CommandText = $"UPDATE UTILESS SET util='{sacapunta.GetType()}', marca = '{sacapunta.Marca}', precio = {sacapunta.Precio},tipo = '{sacapunta.Tipo}', color = null, tamanio = null, id_cartuchera = {sacapunta.IdCartuchera} WHERE id = {id}";
+                comando.CommandText = $"UPDATE NUEVATABLAUTILES SET util='{sacapunta.GetType()}', marca = '{sacapunta.Marca}', precio = {sacapunta.Precio},tipo = '{sacapunta.Tipo}', color = null, tamanio = null, id_cartuchera = {sacapunta.IdCartuchera}, cantidad_tinta = null WHERE id = {id}";
 
                 comando.ExecuteNonQuery();
 
@@ -218,7 +244,7 @@ namespace Entidades
             try
             {
                 conexion.Open();
-                comando.CommandText = "SELECT * FROM UTILESS";
+                comando.CommandText = "SELECT * FROM NUEVATABLAUTILES";
                 reader = comando.ExecuteReader();
 
                 while (reader.Read())
@@ -232,6 +258,29 @@ namespace Entidades
             catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+      
+
+        public static void ModificarUtil(Fibron fibron, int id)
+        {
+            try
+            {
+                comando.Parameters.Clear();
+                conexion.Open();
+                comando.CommandText = $"UPDATE NUEVATABLAUTILES SET util='{fibron.GetType()}', marca = '{fibron.Marca}', precio = {fibron.Precio},tipo = null, color = '{fibron.Color}', tamanio = null, id_cartuchera = {fibron.IdCartuchera}, cantidad_tinta = {fibron.CantidadTinta} WHERE id = {id}";
+
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al editar el util", ex);
             }
             finally
             {
