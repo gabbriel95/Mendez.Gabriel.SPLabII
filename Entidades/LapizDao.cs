@@ -70,6 +70,39 @@ namespace Entidades
 
         }
 
+        /*public static void InsertarUtil(Lapiz lapiz)
+        {
+            try
+            {
+                conexion.Open();
+                //comando.CommandText = $"INSERT INTO NUEVATABLAUTILES VALUES ('{lapiz.GetType()}', '{lapiz.Marca}', {lapiz.Precio}, NULL, '{lapiz.Color}',NULL, {lapiz.IdCartuchera}, NULL )";
+
+                comando.CommandText = "INSERT INTO NUEVATABLAUTILES VALUES (@tipo,@marca,@precio,@tipo,@color,@tamanio,@id_cartuchera,@cantidad_tinta)";
+
+                comando.Parameters.Clear();
+                comando.Parameters.AddWithValue("@tipo", lapiz.GetType());
+                comando.Parameters.AddWithValue("@marca", lapiz.Marca);
+                comando.Parameters.AddWithValue("@precio", lapiz.Precio);
+                comando.Parameters.AddWithValue("@tipo", null);
+                comando.Parameters.AddWithValue("@color", lapiz.Color);
+                comando.Parameters.AddWithValue("@tamanio", null);
+                comando.Parameters.AddWithValue("@id_cartuchera", lapiz.IdCartuchera);
+                comando.Parameters.AddWithValue("@cantidad_tinta", null);
+
+
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el util", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }*/
+
         public static void InsertarUtil(Lapiz lapiz)
         {
             try
@@ -111,6 +144,8 @@ namespace Entidades
                 conexion.Close();
             }
         }
+
+
         public static void InsertarUtil(Goma goma)
         {
             try
@@ -196,6 +231,27 @@ namespace Entidades
             }
         }
 
+        public static void ModificarUtil(Fibron fibron, int id)
+        {
+            try
+            {
+                comando.Parameters.Clear();
+                conexion.Open();
+                comando.CommandText = $"UPDATE NUEVATABLAUTILES SET util='{fibron.GetType()}', marca = '{fibron.Marca}', precio = {fibron.Precio},tipo = null, color = '{fibron.Color}', tamanio = null, id_cartuchera = {fibron.IdCartuchera}, cantidad_tinta = {fibron.CantidadTinta} WHERE id = {id}";
+
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al editar el util", ex);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
         public static void ModificarUtil(Goma goma, int id)
         {
             try
@@ -252,7 +308,7 @@ namespace Entidades
                     id = (int)reader["id"];
                 }
 
-                return id + 1;
+                return id;
 
             }
             catch (Exception ex)
@@ -265,28 +321,9 @@ namespace Entidades
             }
         }
 
-      
 
-        public static void ModificarUtil(Fibron fibron, int id)
-        {
-            try
-            {
-                comando.Parameters.Clear();
-                conexion.Open();
-                comando.CommandText = $"UPDATE NUEVATABLAUTILES SET util='{fibron.GetType()}', marca = '{fibron.Marca}', precio = {fibron.Precio},tipo = null, color = '{fibron.Color}', tamanio = null, id_cartuchera = {fibron.IdCartuchera}, cantidad_tinta = {fibron.CantidadTinta} WHERE id = {id}";
 
-                comando.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al editar el util", ex);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-        }
+     
 
     }
 }

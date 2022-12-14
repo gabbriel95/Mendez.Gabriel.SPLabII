@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Fibron : Utiles, IDeserializa<Lapiz, Fibron>, ISerializa<Lapiz,Fibron>
+    public class Fibron : Utiles, IDeserializa<Fibron>, ISerializa<Fibron>
     {
-        public delegate void CartucheraAction(object fibron, EventArgs e);
+        public delegate void CartucheraAction(object fibron);
         public event CartucheraAction SinTintaEvento;
         public enum eColorFibron
         {
@@ -19,21 +19,16 @@ namespace Entidades
         }
 
         private int cantidadTinta;
-        private eColorFibron color;
         private int tintaFaltante;
+        private eColorFibron color;
+
 
         public int CantidadTinta { get => cantidadTinta; set => cantidadTinta = value; }
         public eColorFibron Color { get => color; set => color = value; }
-
         public int TintaFaltante { get => tintaFaltante; set => tintaFaltante = value; }
 
         public Fibron() { }
 
-        public Fibron(string marca, decimal precio, int cantidadTinda, eColorFibron color) : base(marca, precio, 2)
-        {
-            this.cantidadTinta = cantidadTinda;
-            this.color = color;
-        }
 
         public Fibron(string marca, decimal precio, int cantidadTinda, eColorFibron color, int idCartuchera) : base(marca, precio, idCartuchera)
         {
@@ -41,25 +36,34 @@ namespace Entidades
             this.color = color;
         }
 
-        public Fibron(int id, string marca, decimal precio, int cantidadTinda, eColorFibron color, int idCartuchera) : base(id, marca, precio, 2)
+        public Fibron(int id, string marca, decimal precio, int cantidadTinda, eColorFibron color, int idCartuchera) : base(id, marca, precio, idCartuchera)
         {
             this.cantidadTinta = cantidadTinda;
             this.color = color;
         }
 
-       
 
-        public void Resaltar(int cantidad) 
+
+        public void Resaltar(int cantidad) //dentro de un try y capturar ex, cuando capturo lanzo el invoke
         {
-            if (cantidad <= this.cantidadTinta)
+
+            try
             {
-                cantidadTinta = cantidadTinta - cantidad;
+                if (cantidad <= this.cantidadTinta)
+                {
+                    cantidadTinta = cantidadTinta - cantidad;
+                }
+                else
+                {
+                    cantidadTinta = 0;
+                    tintaFaltante = cantidad - cantidadTinta;
+                    throw new SinTintaException();
+                }
             }
-            else 
+            catch (SinTintaException) 
             {
-                tintaFaltante = cantidad - cantidadTinta;
-                throw new SinTintaException();
-            }
+                SinTintaEvento.Invoke(this);
+            } 
         }
 
         public override string ToString()
@@ -70,21 +74,11 @@ namespace Entidades
             sb.AppendLine($"Color: {this.color}");
             sb.AppendLine($"id_cartuchera: {this.IdCartuchera}");
             sb.AppendLine($"Cantidad de tinta: {this.cantidadTinta}");
-            sb.AppendLine($"Tinda faltante: {this.TintaFaltante}");
+            sb.AppendLine($"Cantidad de tinta faltante: {this.tintaFaltante}");
 
             return sb.ToString();
         }
 
-        public void ManejadorEventoSinTinta()
-        {
-            EventArgs eventArgs = new EventArgs();
-      
-            if (SinTintaEvento is not null)
-            {
-                SinTintaEvento.Invoke(this, eventArgs);
-            }
-
-        }
 
     }
 }

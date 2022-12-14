@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace Entidades
 {
-    public interface IDeserializa <T, U> where T : Lapiz where U : Fibron
+    public interface IDeserializa <T>
     {
 
         public static T Deserializar_xmlTextReader(string nombreArchivo)
@@ -18,7 +18,7 @@ namespace Entidades
             using (XmlTextReader xmlTextReader = new XmlTextReader($"{Lapiz.RutaBase}{nombreArchivo}"))
             {
                 XmlSerializer xml = new XmlSerializer(typeof(T));
-                T util = xml.Deserialize(xmlTextReader) as T;
+                T util = (T)xml.Deserialize(xmlTextReader);
 
                 return util;
             }

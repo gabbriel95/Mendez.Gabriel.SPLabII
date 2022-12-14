@@ -75,7 +75,7 @@ namespace Formulario
             Entidades.Fibron.eColorFibron.Negro,
             Entidades.Fibron.eColorFibron.Azul,
             Entidades.Fibron.eColorFibron.Verde});
-            eleccion = 3;
+            eleccion = 4;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace Formulario
                         listaUtiles?.Add(goma);
 
                         n = dgvCartuchera.Rows.Add();
-                        dgvCartuchera.Rows[n].Cells[0].Value = goma.IdUtil;
+                        dgvCartuchera.Rows[n].Cells[0].Value = LapizDao.GetIdMaximo();
                         dgvCartuchera.Rows[n].Cells[1].Value = goma.GetType();
                         dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
                         dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
@@ -127,7 +127,7 @@ namespace Formulario
                         listaUtiles?.Add(sacapunta);
 
                         n = dgvCartuchera.Rows.Add();
-                        dgvCartuchera.Rows[n].Cells[0].Value = sacapunta.IdUtil;
+                        dgvCartuchera.Rows[n].Cells[0].Value = LapizDao.GetIdMaximo();
                         dgvCartuchera.Rows[n].Cells[1].Value = sacapunta.GetType();
                         dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
                         dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
@@ -139,23 +139,22 @@ namespace Formulario
                         break;
                     case 4:
                         fibron = new Fibron(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
-
-
-                        cartuchera = cartuchera + fibron;
+                        
+             
                         LapizDao.InsertarUtil(fibron);
                         listaUtiles?.Add(fibron);
-
-
                         n = dgvCartuchera.Rows.Add();
-                        dgvCartuchera.Rows[n].Cells[0].Value = fibron.IdUtil;
+
+                        dgvCartuchera.Rows[n].Cells[0].Value = LapizDao.GetIdMaximo();
                         dgvCartuchera.Rows[n].Cells[1].Value = fibron.GetType();
                         dgvCartuchera.Rows[n].Cells[2].Value = textBoxMarca.Text;
                         dgvCartuchera.Rows[n].Cells[3].Value = txtPrecio.Text;
-                        dgvCartuchera.Rows[n].Cells[4].Value = cbxCaracteristica.Text;
-                        dgvCartuchera.Rows[n].Cells[5].Value = null;
+                        dgvCartuchera.Rows[n].Cells[4].Value = null;
+                        dgvCartuchera.Rows[n].Cells[5].Value = cbxCaracteristica.Text;
                         dgvCartuchera.Rows[n].Cells[6].Value = null;
                         dgvCartuchera.Rows[n].Cells[7].Value = txtBoxIdCartuchera.Text;
                         dgvCartuchera.Rows[n].Cells[8].Value = txtCantidadTinta.Text;
+
                         break;
                 }   
                 if(cartuchera.PrecioTotal > 500) 
@@ -220,7 +219,7 @@ namespace Formulario
                         Goma goma = (Goma)listaUtiles[i];
                         this.CargarDataGrid(n, 6, goma.Tamanio.ToString());
                     }
-                    if (listaUtiles[i].GetType() == typeof(Goma))
+                    if (listaUtiles[i].GetType() == typeof(Fibron))
                     {
                         Fibron fibra = (Fibron)listaUtiles[i];
                         this.CargarDataGrid(n, 5, fibra.Color.ToString());
@@ -308,7 +307,7 @@ namespace Formulario
                 }
                 if (radioButtonFibron.Checked) 
                 {
-                    fibron = new Fibron(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text));
+                    fibron = new Fibron(textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text), Convert.ToInt32(txtBoxIdCartuchera.Text));
                     LapizDao.ModificarUtil(fibron, int.Parse(txtBoxId.Text));
                 }
             }
@@ -325,9 +324,17 @@ namespace Formulario
         {
             try
             {
-                lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                ISerializa<Lapiz, Fibron>.Serializar_XmlTextWritter("lapizXML", lapiz);
-                btnDeserializarXML.Enabled = true;
+                if (radioButtonLapiz.Checked)
+                {
+                    lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                    ISerializa<Lapiz>.Serializar_XmlTextWritter("lapizXML", lapiz);
+                    btnDeserializadLapizrXML.Enabled = true;
+                }
+                else 
+                {
+                    throw new Exception();
+                }
+              
             }
             catch (Exception) 
             {
@@ -340,7 +347,7 @@ namespace Formulario
         {
             try
             {
-                lapiz = IDeserializa<Lapiz,Fibron>.Deserializar_xmlTextReader("lapizXML");
+                lapiz = IDeserializa<Lapiz>.Deserializar_xmlTextReader("lapizXML");
                 radioButtonLapiz.Checked = true;
                 textBoxMarca.Text = lapiz.Marca;
                 txtPrecio.Text = lapiz.Precio.ToString();
@@ -358,9 +365,17 @@ namespace Formulario
         {
             try
             {
-                lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
-                ISerializa<Lapiz, Fibron>.Serializar_JSON("lapizJson", lapiz);
-                btnDeserializarJson.Enabled = true;
+                if (radioButtonLapiz.Checked)
+                {
+                    lapiz = new Lapiz(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), (eColor)Enum.Parse(typeof(eColor), cbxCaracteristica.Text), 1);
+                    ISerializa<Lapiz>.Serializar_JSON("lapizJson", lapiz);
+                    btnDeserializarLapizJson.Enabled = true;
+                }
+                else 
+                {
+                    throw new Exception();
+                }
+                  
             }
             catch (Exception) 
             {
@@ -373,7 +388,7 @@ namespace Formulario
         {
             try
             {
-                lapiz = IDeserializa<Lapiz, Fibron>.DesSerializar_JSON("lapizJson");
+                lapiz = IDeserializa<Lapiz>.DesSerializar_JSON("lapizJson");
                 radioButtonLapiz.Checked = true;
                 textBoxMarca.Text = lapiz.Marca;
                 txtPrecio.Text = lapiz.Precio.ToString();
@@ -414,7 +429,6 @@ namespace Formulario
                 lblErrorFloat.Visible = false;
             }
         }
-        //Preguntar como se podria simplificar este codigo repetido
         private void txtBoxIdCartuchera_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
@@ -428,7 +442,88 @@ namespace Formulario
             }
         }
 
-      
+        private void btnSerializarFibronXml_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radioButtonFibron.Checked)
+                {
+                    fibron = new Fibron(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text), 1);
+                    ISerializa<Fibron>.Serializar_XmlTextWritter("fibronXML", fibron);
+                    btnDeserializadLapizrXML.Enabled = true;
+                }
+                else 
+                {
+                    throw new Exception();
+                }
+               
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("El objecto a serializar debe ser un FIBRON");
+            }
+        }
+
+        private void btnDeserializarFibronXml_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                fibron = IDeserializa<Fibron>.Deserializar_xmlTextReader("fibronXML");
+                radioButtonLapiz.Checked = true;
+                textBoxMarca.Text = fibron.Marca;
+                txtPrecio.Text = fibron.Precio.ToString();
+                cbxCaracteristica.Text = fibron.Color.ToString();
+                txtBoxId.Text = fibron.IdUtil.ToString();
+                txtCantidadTinta.Text = fibron.CantidadTinta.ToString();    
+            }
+            catch
+            {
+                MessageBox.Show("No se encontro un archivo para deserializar");
+            }
+        }
+
+        private void btnSerializarFibronJson_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radioButtonFibron.Checked)
+                {
+                    fibron = new Fibron(int.Parse(txtBoxId.Text), textBoxMarca.Text, decimal.Parse(txtPrecio.Text), int.Parse(txtCantidadTinta.Text), (eColorFibron)Enum.Parse(typeof(eColorFibron), cbxCaracteristica.Text), 1);
+                    ISerializa<Fibron>.Serializar_JSON("fibronJson", fibron);
+                    btnDeserializarLapizJson.Enabled = true;
+                }
+                else 
+                {
+                    throw new Exception();
+                }
+                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("El objecto a serializar debe ser un Fibron");
+            }
+
+        }
+
+        private void btnDeserializarFibronJson_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                fibron = IDeserializa<Fibron>.DesSerializar_JSON("fibronJson");
+                radioButtonLapiz.Checked = true;
+                textBoxMarca.Text = fibron.Marca;
+                txtPrecio.Text = fibron.Precio.ToString();
+                cbxCaracteristica.Text = fibron.Color.ToString();
+                txtBoxId.Text = fibron.IdUtil.ToString();
+                txtCantidadTinta.Text = fibron.CantidadTinta.ToString();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se encontro un archivo para deserializar");
+            }
+
+        }
     }
 }
 

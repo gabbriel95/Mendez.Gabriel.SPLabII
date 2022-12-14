@@ -10,13 +10,13 @@ using System.Text.Json;
 
 namespace Entidades
 {
-    public interface ISerializa <T,U> where T : Lapiz where U : Fibron
+    public interface ISerializa <T>
     {
         public static void Serializar_XmlTextWritter(string nombreArchivo, T util)
         {
             using (XmlTextWriter xmlTextWriter = new XmlTextWriter($"{Lapiz.RutaBase}{nombreArchivo}", Encoding.UTF8))
             {
-                XmlSerializer xml = new XmlSerializer(typeof(Lapiz));
+                XmlSerializer xml = new XmlSerializer(typeof(T));
                 xmlTextWriter.Formatting = Formatting.Indented;
                 xml.Serialize(xmlTextWriter, util);
             }

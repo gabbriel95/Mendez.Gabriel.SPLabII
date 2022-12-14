@@ -26,14 +26,14 @@ namespace Formulario
         {
             InitializeComponent();
             listaUtiles = new List<Utiles>();
-            cartuchera = new Cartuchera<Utiles>(1,listaUtiles, 5);
+            cartuchera = new Cartuchera<Utiles>(1, listaUtiles, 5);
         }
 
         private void btnAnadirUtil_Click(object sender, EventArgs e)
         {
             FrmAgregarUtil frmAgregarUtil = new FrmAgregarUtil();
             frmAgregarUtil.ShowDialog();
-         
+
         }
 
         private void btnLeerArchivo_Click(object sender, EventArgs e)
@@ -43,18 +43,22 @@ namespace Formulario
                 richTextBoxLeerArchivo.Text = GestorDeArchivos.LeerArchivo("tickets.txt");
 
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 MessageBox.Show("No existe un archivo para cargar datos");
             }
-         
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            fibron1 = new Fibron("Faber Cassel", 20, 10, Fibron.eColorFibron.Rojo);
-            fibron2 = new Fibron("Arti", 20, 4, Fibron.eColorFibron.Negro);
-            fibron3 = new Fibron("Fibron La salada", 2, 10, Fibron.eColorFibron.Verde);
+            fibron1 = new Fibron("Faber Cassel", 20, 10, Fibron.eColorFibron.Rojo, 2);
+            fibron2 = new Fibron("Arti", 20, 4, Fibron.eColorFibron.Negro, 2);
+            fibron3 = new Fibron("Fibron La salada", 2, 10, Fibron.eColorFibron.Verde, 2);
+            fibron1.SinTintaEvento += CrearArchivoFibron;
+            fibron2.SinTintaEvento += CrearArchivoFibron;
+            fibron3.SinTintaEvento += CrearArchivoFibron; // usar for
+
             listaFibrones = new List<Utiles>();
 
             listaFibrones.Add(fibron1);
@@ -69,14 +73,14 @@ namespace Formulario
         private void brnResaltar_Click(object sender, EventArgs e)
         {
             Random random = new Random();
-            int cantidadR = random.Next(1,10);
-            int fibronR = random.Next(0,2);
+            int cantidadR = random.Next(1, 10);
+            int fibronR = random.Next(0, 2);
             Fibron fibronAux = new Fibron();
 
 
             try
             {
-                if (cartucheraFibrones?.Utiles[fibronR] is Fibron) 
+                if (cartucheraFibrones?.Utiles[fibronR] is Fibron)
                 {
                     fibronAux = (Fibron)cartucheraFibrones.Utiles[fibronR];
                     fibronAux.Resaltar(cantidadR);
@@ -84,20 +88,18 @@ namespace Formulario
 
                 }
             }
-            catch (SinTintaException ex) 
+            catch (SinTintaException ex)
             {
-                fibronAux.SinTintaEvento += CrearArchivoFibron;
-                fibronAux.ManejadorEventoSinTinta();
                 MessageBox.Show(ex.Message);
             }
 
         }
 
-        public void CrearArchivoFibron(object fibron, EventArgs e)
+        public void CrearArchivoFibron(object fibron)
         {
             try
             {
-               GestorDeArchivos.CrearArchivo("errors.log", fibron.ToString(), true);
+                GestorDeArchivos.CrearArchivo("errors.log", fibron.ToString(), true);
                 MessageBox.Show("Se creo un archivo");
             }
             catch (Exception)

@@ -50,24 +50,28 @@ namespace Formulario
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCartuchera = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadTinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.txtBoxId = new System.Windows.Forms.TextBox();
-            this.btnSerializarXML = new System.Windows.Forms.Button();
-            this.btnDeserializarXML = new System.Windows.Forms.Button();
+            this.btnSerializarLapizXML = new System.Windows.Forms.Button();
+            this.btnDeserializadLapizrXML = new System.Windows.Forms.Button();
             this.lblId = new System.Windows.Forms.Label();
-            this.btnSerializarJson = new System.Windows.Forms.Button();
-            this.btnDeserializarJson = new System.Windows.Forms.Button();
+            this.btnSerializarLapizJson = new System.Windows.Forms.Button();
+            this.btnDeserializarLapizJson = new System.Windows.Forms.Button();
             this.lblIdCartuchera = new System.Windows.Forms.Label();
             this.txtBoxIdCartuchera = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lblErrorFloat = new System.Windows.Forms.Label();
             this.lblErrorIdCartuchera = new System.Windows.Forms.Label();
-            this.cantidadTinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTinta = new System.Windows.Forms.Label();
             this.txtCantidadTinta = new System.Windows.Forms.TextBox();
             this.radioButtonFibron = new System.Windows.Forms.RadioButton();
+            this.btnSerializarFibronXml = new System.Windows.Forms.Button();
+            this.btnDeserializarFibronXml = new System.Windows.Forms.Button();
+            this.btnSerializarFibronJson = new System.Windows.Forms.Button();
+            this.btnDeserializarFibronJson = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartuchera)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,6 +236,11 @@ namespace Formulario
             this.idCartuchera.HeaderText = "ID cartuchera";
             this.idCartuchera.Name = "idCartuchera";
             // 
+            // cantidadTinta
+            // 
+            this.cantidadTinta.HeaderText = "Cantidad tinta";
+            this.cantidadTinta.Name = "cantidadTinta";
+            // 
             // btnBorrar
             // 
             this.btnBorrar.Location = new System.Drawing.Point(284, 50);
@@ -261,25 +270,25 @@ namespace Formulario
             this.txtBoxId.Size = new System.Drawing.Size(48, 23);
             this.txtBoxId.TabIndex = 22;
             // 
-            // btnSerializarXML
+            // btnSerializarLapizXML
             // 
-            this.btnSerializarXML.Location = new System.Drawing.Point(284, 108);
-            this.btnSerializarXML.Name = "btnSerializarXML";
-            this.btnSerializarXML.Size = new System.Drawing.Size(155, 23);
-            this.btnSerializarXML.TabIndex = 23;
-            this.btnSerializarXML.Text = "Serializar Lapiz XML";
-            this.btnSerializarXML.UseVisualStyleBackColor = true;
-            this.btnSerializarXML.Click += new System.EventHandler(this.btnSerializarXML_Click);
+            this.btnSerializarLapizXML.Location = new System.Drawing.Point(284, 108);
+            this.btnSerializarLapizXML.Name = "btnSerializarLapizXML";
+            this.btnSerializarLapizXML.Size = new System.Drawing.Size(155, 23);
+            this.btnSerializarLapizXML.TabIndex = 23;
+            this.btnSerializarLapizXML.Text = "Serializar Lapiz XML";
+            this.btnSerializarLapizXML.UseVisualStyleBackColor = true;
+            this.btnSerializarLapizXML.Click += new System.EventHandler(this.btnSerializarXML_Click);
             // 
-            // btnDeserializarXML
+            // btnDeserializadLapizrXML
             // 
-            this.btnDeserializarXML.Location = new System.Drawing.Point(284, 137);
-            this.btnDeserializarXML.Name = "btnDeserializarXML";
-            this.btnDeserializarXML.Size = new System.Drawing.Size(155, 23);
-            this.btnDeserializarXML.TabIndex = 24;
-            this.btnDeserializarXML.Text = "Deserializar Lapiz XML";
-            this.btnDeserializarXML.UseVisualStyleBackColor = true;
-            this.btnDeserializarXML.Click += new System.EventHandler(this.btnDeserializarXML_Click);
+            this.btnDeserializadLapizrXML.Location = new System.Drawing.Point(284, 137);
+            this.btnDeserializadLapizrXML.Name = "btnDeserializadLapizrXML";
+            this.btnDeserializadLapizrXML.Size = new System.Drawing.Size(155, 23);
+            this.btnDeserializadLapizrXML.TabIndex = 24;
+            this.btnDeserializadLapizrXML.Text = "Deserializar Lapiz XML";
+            this.btnDeserializadLapizrXML.UseVisualStyleBackColor = true;
+            this.btnDeserializadLapizrXML.Click += new System.EventHandler(this.btnDeserializarXML_Click);
             // 
             // lblId
             // 
@@ -290,25 +299,25 @@ namespace Formulario
             this.lblId.TabIndex = 25;
             this.lblId.Text = "ID";
             // 
-            // btnSerializarJson
+            // btnSerializarLapizJson
             // 
-            this.btnSerializarJson.Location = new System.Drawing.Point(284, 166);
-            this.btnSerializarJson.Name = "btnSerializarJson";
-            this.btnSerializarJson.Size = new System.Drawing.Size(155, 23);
-            this.btnSerializarJson.TabIndex = 26;
-            this.btnSerializarJson.Text = "Serializar Lapiz JSON";
-            this.btnSerializarJson.UseVisualStyleBackColor = true;
-            this.btnSerializarJson.Click += new System.EventHandler(this.btnSerializarJson_Click);
+            this.btnSerializarLapizJson.Location = new System.Drawing.Point(284, 166);
+            this.btnSerializarLapizJson.Name = "btnSerializarLapizJson";
+            this.btnSerializarLapizJson.Size = new System.Drawing.Size(155, 23);
+            this.btnSerializarLapizJson.TabIndex = 26;
+            this.btnSerializarLapizJson.Text = "Serializar Lapiz JSON";
+            this.btnSerializarLapizJson.UseVisualStyleBackColor = true;
+            this.btnSerializarLapizJson.Click += new System.EventHandler(this.btnSerializarJson_Click);
             // 
-            // btnDeserializarJson
+            // btnDeserializarLapizJson
             // 
-            this.btnDeserializarJson.Location = new System.Drawing.Point(284, 195);
-            this.btnDeserializarJson.Name = "btnDeserializarJson";
-            this.btnDeserializarJson.Size = new System.Drawing.Size(155, 22);
-            this.btnDeserializarJson.TabIndex = 27;
-            this.btnDeserializarJson.Text = "Deserializar Lapiz Json";
-            this.btnDeserializarJson.UseVisualStyleBackColor = true;
-            this.btnDeserializarJson.Click += new System.EventHandler(this.btnDeserializarJson_Click);
+            this.btnDeserializarLapizJson.Location = new System.Drawing.Point(284, 195);
+            this.btnDeserializarLapizJson.Name = "btnDeserializarLapizJson";
+            this.btnDeserializarLapizJson.Size = new System.Drawing.Size(155, 22);
+            this.btnDeserializarLapizJson.TabIndex = 27;
+            this.btnDeserializarLapizJson.Text = "Deserializar Lapiz Json";
+            this.btnDeserializarLapizJson.UseVisualStyleBackColor = true;
+            this.btnDeserializarLapizJson.Click += new System.EventHandler(this.btnDeserializarJson_Click);
             // 
             // lblIdCartuchera
             // 
@@ -362,11 +371,6 @@ namespace Formulario
             this.lblErrorIdCartuchera.Text = "Solo numeros";
             this.lblErrorIdCartuchera.Visible = false;
             // 
-            // cantidadTinta
-            // 
-            this.cantidadTinta.HeaderText = "Cantidad tinta";
-            this.cantidadTinta.Name = "cantidadTinta";
-            // 
             // lblTinta
             // 
             this.lblTinta.AutoSize = true;
@@ -395,11 +399,55 @@ namespace Formulario
             this.radioButtonFibron.UseVisualStyleBackColor = true;
             this.radioButtonFibron.CheckedChanged += new System.EventHandler(this.radioButtonFibron_CheckedChanged);
             // 
+            // btnSerializarFibronXml
+            // 
+            this.btnSerializarFibronXml.Location = new System.Drawing.Point(469, 108);
+            this.btnSerializarFibronXml.Name = "btnSerializarFibronXml";
+            this.btnSerializarFibronXml.Size = new System.Drawing.Size(155, 23);
+            this.btnSerializarFibronXml.TabIndex = 38;
+            this.btnSerializarFibronXml.Text = "Serializar Fibron XML";
+            this.btnSerializarFibronXml.UseVisualStyleBackColor = true;
+            this.btnSerializarFibronXml.Click += new System.EventHandler(this.btnSerializarFibronXml_Click);
+            // 
+            // btnDeserializarFibronXml
+            // 
+            this.btnDeserializarFibronXml.Location = new System.Drawing.Point(469, 138);
+            this.btnDeserializarFibronXml.Name = "btnDeserializarFibronXml";
+            this.btnDeserializarFibronXml.Size = new System.Drawing.Size(155, 23);
+            this.btnDeserializarFibronXml.TabIndex = 39;
+            this.btnDeserializarFibronXml.Text = "Deserializar Fibron XML";
+            this.btnDeserializarFibronXml.UseVisualStyleBackColor = true;
+            this.btnDeserializarFibronXml.Click += new System.EventHandler(this.btnDeserializarFibronXml_Click);
+            // 
+            // btnSerializarFibronJson
+            // 
+            this.btnSerializarFibronJson.Location = new System.Drawing.Point(469, 167);
+            this.btnSerializarFibronJson.Name = "btnSerializarFibronJson";
+            this.btnSerializarFibronJson.Size = new System.Drawing.Size(155, 23);
+            this.btnSerializarFibronJson.TabIndex = 40;
+            this.btnSerializarFibronJson.Text = "Serializar Fibron JSON";
+            this.btnSerializarFibronJson.UseVisualStyleBackColor = true;
+            this.btnSerializarFibronJson.Click += new System.EventHandler(this.btnSerializarFibronJson_Click);
+            // 
+            // btnDeserializarFibronJson
+            // 
+            this.btnDeserializarFibronJson.Location = new System.Drawing.Point(469, 195);
+            this.btnDeserializarFibronJson.Name = "btnDeserializarFibronJson";
+            this.btnDeserializarFibronJson.Size = new System.Drawing.Size(155, 22);
+            this.btnDeserializarFibronJson.TabIndex = 41;
+            this.btnDeserializarFibronJson.Text = "Deserializar Fibron Json";
+            this.btnDeserializarFibronJson.UseVisualStyleBackColor = true;
+            this.btnDeserializarFibronJson.Click += new System.EventHandler(this.btnDeserializarFibronJson_Click);
+            // 
             // FrmAgregarUtil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnDeserializarFibronJson);
+            this.Controls.Add(this.btnSerializarFibronJson);
+            this.Controls.Add(this.btnDeserializarFibronXml);
+            this.Controls.Add(this.btnSerializarFibronXml);
             this.Controls.Add(this.radioButtonFibron);
             this.Controls.Add(this.txtCantidadTinta);
             this.Controls.Add(this.lblTinta);
@@ -408,11 +456,11 @@ namespace Formulario
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.txtBoxIdCartuchera);
             this.Controls.Add(this.lblIdCartuchera);
-            this.Controls.Add(this.btnDeserializarJson);
-            this.Controls.Add(this.btnSerializarJson);
+            this.Controls.Add(this.btnDeserializarLapizJson);
+            this.Controls.Add(this.btnSerializarLapizJson);
             this.Controls.Add(this.lblId);
-            this.Controls.Add(this.btnDeserializarXML);
-            this.Controls.Add(this.btnSerializarXML);
+            this.Controls.Add(this.btnDeserializadLapizrXML);
+            this.Controls.Add(this.btnSerializarLapizXML);
             this.Controls.Add(this.txtBoxId);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnBorrar);
@@ -459,11 +507,11 @@ namespace Formulario
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.TextBox txtBoxId;
-        private System.Windows.Forms.Button btnSerializarXML;
-        private System.Windows.Forms.Button btnDeserializarXML;
+        private System.Windows.Forms.Button btnSerializarLapizXML;
+        private System.Windows.Forms.Button btnDeserializadLapizrXML;
         private System.Windows.Forms.Label lblId;
-        private System.Windows.Forms.Button btnSerializarJson;
-        private System.Windows.Forms.Button btnDeserializarJson;
+        private System.Windows.Forms.Button btnSerializarLapizJson;
+        private System.Windows.Forms.Button btnDeserializarLapizJson;
         private System.Windows.Forms.Label lblIdCartuchera;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCartuchera;
         private System.Windows.Forms.TextBox txtBoxIdCartuchera;
@@ -475,5 +523,9 @@ namespace Formulario
         private System.Windows.Forms.Label lblTinta;
         private System.Windows.Forms.TextBox txtCantidadTinta;
         private System.Windows.Forms.RadioButton radioButtonFibron;
+        private System.Windows.Forms.Button btnSerializarFibronXml;
+        private System.Windows.Forms.Button btnDeserializarFibronXml;
+        private System.Windows.Forms.Button btnSerializarFibronJson;
+        private System.Windows.Forms.Button btnDeserializarFibronJson;
     }
 }

@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace Entidades
 {
-    public class Lapiz : Utiles, IDeserializa<Lapiz, Fibron>, ISerializa<Lapiz, Fibron>
+    public class Lapiz : Utiles, IDeserializa<Lapiz>, ISerializa<Lapiz>
     {
         private static string rutaBase;
         public enum eColor
